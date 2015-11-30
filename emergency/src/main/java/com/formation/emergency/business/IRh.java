@@ -1,5 +1,5 @@
 package com.formation.emergency.business;
 
-public interface IAmbulance {
+public interface IRh {
 
 }

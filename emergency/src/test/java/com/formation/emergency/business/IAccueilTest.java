@@ -2,6 +2,7 @@ package com.formation.emergency.business;
 
 import org.omg.PortableInterceptor.SUCCESSFUL;
 
+import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Patient;
 
 import junit.framework.TestCase;
@@ -30,6 +31,18 @@ public class IAccueilTest extends TestCase {
 		catch (Exception ex)
 		{
 			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
+		}
+	}
+	
+	public void testSortie() {
+		try
+		{
+			Patient patient = new Patient();
+			FeuilleSortie fs = accueil.sortie(patient);	
+		}
+		catch (Exception ex)
+		{
+			fail("IAccueilTest.testSortie()" + ex.getMessage());
 		}
 	}
 
