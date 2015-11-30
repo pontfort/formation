@@ -1,15 +1,5 @@
 package com.formation.emergency;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.formation.emergency.business.IAccueil;
-import com.formation.emergency.domain.pojo.FeuilleSortie;
-import com.formation.emergency.domain.pojo.Patient;
-import com.formation.emergency.domain.pojo.Personne;
-import com.formation.emergency.exception.RechercheException;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
