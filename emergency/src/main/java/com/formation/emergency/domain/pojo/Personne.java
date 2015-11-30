@@ -3,7 +3,7 @@ package com.formation.emergency.domain.pojo;
 import java.util.Date;
 
 public class Personne {
-	
+		
 	//TODO obligatoire
 	private Date dateNaissance;
 	
@@ -45,6 +45,13 @@ public class Personne {
 	}
 	public void setPere(Personne pere) {
 		this.pere = pere;
+	}
+	
+	@Override
+	public String toString() {
+		return nom + " " + prenom
+			 + (mere != null ? "\nmere = " + mere : "")
+			 + (pere != null ? "\npere = " + pere : "");
 	}
 	
 }

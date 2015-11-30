@@ -1,5 +1,8 @@
 package com.formation.emergency.business;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Patient;
 
@@ -7,23 +10,29 @@ import junit.framework.TestCase;
 
 public class IAccueilTest extends TestCase {
 
+	ApplicationContext context = null;
 	IAccueil accueil = null;
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		//TODO instancier accueil
+		this.context = new ClassPathXmlApplicationContext("emergency.xml");		
+		this.accueil = (IAccueil) context.getBean("accueil");
 	}
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		this.context = null;
 		accueil = null;
 	}
 
 	public void testReceptionner() {
 		try
 		{
-			Patient patient = new Patient();
-			accueil.receptionner(patient);
+			Patient p1 = (Patient) context.getBean("patient1");
+			Patient p2 = (Patient) context.getBean("patient2");
+						
+			accueil.receptionner(p1);
+			accueil.receptionner(p2);
 			
 		}
 		catch (Exception ex)
@@ -34,8 +43,16 @@ public class IAccueilTest extends TestCase {
 	
 	public void testSortie() {
 		try {
-			Patient patient = new Patient();
-			FeuilleSortie feuille = accueil.sortie(patient);
+			
+			Patient p1 = (Patient) context.getBean("patient1");
+			Patient p2 = (Patient) context.getBean("patient2");
+			
+			FeuilleSortie f1 = accueil.sortie(p1);
+			FeuilleSortie f2 = accueil.sortie(p2);
+			
+			System.out.println("f1 = " + f1);
+			System.out.println("f2 = " + f2);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}				
