@@ -52,4 +52,10 @@ public class Personne {
 		this.pere = pere;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Personne [nom=%s, prenom=%s, dateNaissance=%s, mere=%s, pere=%s]", nom, prenom,
+				dateNaissance, mere, pere);
+	}
+
 }
