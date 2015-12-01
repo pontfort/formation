@@ -35,8 +35,6 @@
 
 	</bean>
 
-	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil">
-
-	</bean>
+	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil" />
 
 </beans>
