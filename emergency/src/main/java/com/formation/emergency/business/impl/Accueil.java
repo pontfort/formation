@@ -1,9 +1,9 @@
 package com.formation.emergency.business.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.formation.emergency.business.IAccueil;
+import com.formation.emergency.domain.dao.IRepository;
 import com.formation.emergency.domain.pojo.ActeDeces;
 import com.formation.emergency.domain.pojo.ActeNaissance;
 import com.formation.emergency.domain.pojo.Consultation;
@@ -16,13 +16,14 @@ import com.formation.emergency.exception.code.Recherche;
 
 public class Accueil implements IAccueil {
 
-	private List<Patient> patientsReceptionnes = new ArrayList<Patient>();
+	@Autowired
+	private IRepository<Patient> patientDao;
 
 	@Override
 	public boolean receptionner(Patient patient) throws RechercheException {
 		if (patient == null)
 			throw new RechercheException(Recherche.NULL, "Le petient n'existe pas !");
-		patientsReceptionnes.add(patient);
+		patientDao.create(patient);
 		return true;
 	}
 
@@ -30,19 +31,24 @@ public class Accueil implements IAccueil {
 	public FeuilleSortie sortie(Patient patient) throws RechercheException {
 		if (patient == null)
 			throw new RechercheException(Recherche.NULL, "Le petient n'existe pas !");
-		boolean remove = patientsReceptionnes.remove(patient);
 
-		if (!remove)
-			return null;
+		EtatPatient etat = patient.getEtat();
+		patientDao.delete(patient.getUID());
+
+		patient = patientDao.find(patient.getUID());
+
+		// attention il existe tjrs ?!
+		if (patient != null)
+			throw new RechercheException(Recherche.EXISTE, "Attention le patient n'a pas été supprimé");
 
 		FeuilleSortie fs = null;
-		if (patient.getEtat() == EtatPatient.CONSULTATION)
+		if (etat == EtatPatient.CONSULTATION)
 			fs = new Consultation();
-		else if (patient.getEtat() == EtatPatient.ORDONNANCE)
+		else if (etat == EtatPatient.ORDONNANCE)
 			fs = new Ordonnance();
-		else if (patient.getEtat() == EtatPatient.MORT)
+		else if (etat == EtatPatient.MORT)
 			fs = new ActeDeces();
-		else if (patient.getEtat() == EtatPatient.NAISSANCE)
+		else if (etat == EtatPatient.NAISSANCE)
 			fs = new ActeNaissance();
 
 		return fs;
@@ -51,7 +57,15 @@ public class Accueil implements IAccueil {
 	@Override
 	public String toString() {
 		return String.format("Accueil [toString()=%s, patientsReceptionnes=%s]", super.toString(),
-				patientsReceptionnes);
+				patientDao.findall());
+	}
+
+	public IRepository<Patient> getPatientDao() {
+		return patientDao;
+	}
+
+	public void setPatientDao(IRepository<Patient> patientDao) {
+		this.patientDao = patientDao;
 	}
 
 }

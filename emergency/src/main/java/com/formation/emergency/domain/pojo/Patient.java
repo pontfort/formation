@@ -39,4 +39,10 @@ public class Patient extends Personne {
 				super.toString());
 	}
 
+	public String getUID() {
+		return getNom() + getPrenom() + getNumeroSecu();
+	}
+
+	
+	
 }

@@ -1,5 +1,7 @@
 package com.formation.emergency.business;
 
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.formation.emergency.domain.pojo.FeuilleSortie;
@@ -7,36 +9,25 @@ import com.formation.emergency.domain.pojo.Patient;
 
 import junit.framework.TestCase;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class IAccueilTest extends TestCase {
 
 	IAccueil accueil = null;
 	ClassPathXmlApplicationContext context = null;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	public IAccueilTest() {
 		context = new ClassPathXmlApplicationContext("emergency.xml");
 		accueil = (IAccueil) context.getBean("accueil");
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
 	}
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		accueil = null;
 		context = null;
-	}
-
-	public void testsortie() {
-		try {
-			Patient person = (Patient) context.getBean("personne");
-			
-			FeuilleSortie sortie = accueil.sortie(person);
-			if (sortie == null)
-				fail("La sortie ne s'est pas faite");
-			
-			assertTrue(true);
-			
-		} catch (Exception ex) {
-			fail("IAccueilTest.testsortie()" + ex.getMessage());
-		}
 	}
 
 	public void testReceptionner() {
@@ -51,5 +42,20 @@ public class IAccueilTest extends TestCase {
 		}
 	}
 
+	public void testsortie() {
+		try {
+			Patient person = (Patient) context.getBean("personne");
+			accueil.receptionner(person);
+
+			FeuilleSortie sortie = accueil.sortie(person);
+			if (sortie == null)
+				fail("La sortie ne s'est pas faite");
+
+			assertTrue(true);
+
+		} catch (Exception ex) {
+			fail("IAccueilTest.testsortie()" + ex.getMessage());
+		}
+	}
 
 }
