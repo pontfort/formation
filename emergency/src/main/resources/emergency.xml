@@ -11,23 +11,19 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:component-scan base-package="com.formation.emergency"></context:component-scan>
- 
-	<bean id="pere" class="com.formation.emergency.domain.pojo.Personne">
 
+	<bean id="pere" class="com.formation.emergency.domain.pojo.Personne">
 		<property name="nom" value="Pontfort" />
 		<property name="prenom" value="Gérard" />
-
 	</bean>
-	<bean id="mere" class="com.formation.emergency.domain.pojo.Patient">
 
+	<bean id="mere" class="com.formation.emergency.domain.pojo.Patient">
 		<property name="nom" value="Mary" />
 		<property name="prenom" value="Fanfan" />
 		<property name="numeroSecu" value="BODIDIAZEROZEROZER" />
-
 	</bean>
 
 	<bean id="personne" class="com.formation.emergency.domain.pojo.Patient">
-
 		<property name="etat" value="CONSULTATION" />
 		<property name="numeroSecu" value="BODIDIAZEROZEROZER" />
 		<property name="nom" value="Pontfort" />
@@ -35,25 +31,15 @@
 		<property name="dateNaissance" value="01/06/1979 2:45:00" />
 		<property name="pere" ref="pere" />
 		<property name="mere" ref="mere" />
-
 	</bean>
 
 	<bean id="voiture" class="com.formation.emergency.domain.pojo.Equipement">
-
 		<property name="etat" value="FONCTIONNEL" />
 		<property name="type" value="VOITURE" />
 		<property name="id" value="123" />
-
 	</bean>
 
-	<bean id="patientDao" class="com.formation.emergency.domain.dao.PatientDAO" />
-	<bean id="logistiqueDao" class="com.formation.emergency.domain.dao.LogistiqueDAO" />
-
-	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil">
-		<property name="patientDao" ref="patientDao" />
-	</bean>
-	<bean id="logistique" class="com.formation.emergency.business.impl.Logistique">
-		<property name="logistiqueDao" ref="logistiqueDao" />
-	</bean>
+	<import resource="emergency-dao.xml" />
+	<import resource="emergency-service.xml" />
 
 </beans>

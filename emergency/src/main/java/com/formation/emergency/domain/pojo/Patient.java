@@ -1,11 +1,23 @@
 package com.formation.emergency.domain.pojo;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
+@Entity
 public class Patient extends Personne {
 
-	// TODO non obligatoire
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@Embedded
 	private Adresse adresse;
+
 	private String numeroSecu;
 	private EtatPatient etat;
 
@@ -33,6 +45,14 @@ public class Patient extends Personne {
 		this.adresse = adresse;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Patient [adresse=%s, numeroSecu=%s, toString()=%s]", adresse, numeroSecu,
@@ -43,6 +63,4 @@ public class Patient extends Personne {
 		return getNom() + getPrenom() + getNumeroSecu();
 	}
 
-	
-	
 }
