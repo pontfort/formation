@@ -1,9 +1,9 @@
 package com.formation.emergency.business.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.formation.emergency.business.IAccueil;
+import com.formation.emergency.domain.dao.IRepository;
 import com.formation.emergency.domain.pojo.ActeDeces;
 import com.formation.emergency.domain.pojo.Consultation;
 import com.formation.emergency.domain.pojo.FeuilleSortie;
@@ -12,32 +12,38 @@ import com.formation.emergency.domain.pojo.Patient;
 import com.formation.emergency.exception.RechercheException;
 
 public class Accueil implements IAccueil {
-	
-	private List<Patient> patients = new ArrayList<Patient>();
+
+	private IRepository<Patient> patientDao;
 
 	@Override
 	public boolean receptionner(Patient patient) throws RechercheException {
-		if(patients.size() > 20){
-			return false;
-		}
-		patients.add(patient);
+		patientDao.create(patient);
 		return true;
 	}
 
 	@Override
 	public FeuilleSortie sortie(Patient patient) {
-		switch(patient.getEtat()){
+		switch (patient.getEtat()) {
 		case MORT:
-			patients.remove(patient);
+			patientDao.delete(patient);
 			return new ActeDeces();
 		case DOIT_CONSULTER:
 			return new Consultation();
 		case RENTRE_CHEZ_LUI:
-			patients.remove(patient);
+			patientDao.delete(patient);
 			return new Ordonnance();
 		default:
 			return new Consultation();
 		}
 	}
+
+	public IRepository<Patient> getPatientDao() {
+		return patientDao;
+	}
+
+	public void setPatientDao(IRepository<Patient> patientDao) {
+		this.patientDao = patientDao;
+	}
+
 
 }

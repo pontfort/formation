@@ -8,11 +8,7 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
-    <context:component-scan base-package="com.formation.emergency"/>
-	<bean id="personne" class="com.formation.emergency.domain.pojo.Personne">
-		<property name="nom" value="fred"/>
-		<property name="prenom" value="chopin"/>
+	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil">
+		<property name="patientDao" ref="daoPatient"/>
 	</bean>
-	<import resource="azam-dao.xml"/>
-	<import resource="azam-service.xml"/>
 </beans>
