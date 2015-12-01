@@ -7,6 +7,7 @@ public class Patient extends Personne {
 	//TODO non obligatoire
 	private Adresse adresse;
 	private String numeroSecu;
+	private EtatPatient etatPatient;
 	
 	public Adresse getAdresse() {
 		return adresse;
@@ -22,6 +23,14 @@ public class Patient extends Personne {
 
 	public void setNumeroSecu(String numeroSecu) {
 		this.numeroSecu = numeroSecu;
+	}
+
+	public EtatPatient getEtatPatient() {
+		return etatPatient;
+	}
+
+	public void setEtatPatient(EtatPatient etatPatient) {
+		this.etatPatient = etatPatient;
 	}
 	
 }
