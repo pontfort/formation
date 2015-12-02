@@ -2,15 +2,40 @@ package com.formation.emergency.domain.pojo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
+@MappedSuperclass
 public class Personne {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+	@Column(name = "name")
 	private String nom;
+	@Column(name = "firstname")
 	private String prenom;
-
 	// TODO obligatoire
+	@Column(name = "birth_date")
 	private Date dateNaissance;
+	@Column(name = "mother")
+	@Transient
 	private Personne mere;
+	@Column(name = "father")
+	@Transient
 	private Personne pere;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNom() {
 		return nom;

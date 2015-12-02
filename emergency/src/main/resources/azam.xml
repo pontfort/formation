@@ -13,6 +13,7 @@
 		<property name="nom" value="fred"/>
 		<property name="prenom" value="chopin"/>
 	</bean>
+	<import resource="azam-confDB.xml"/>
 	<import resource="azam-dao.xml"/>
 	<import resource="azam-service.xml"/>
 </beans>

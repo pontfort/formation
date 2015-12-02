@@ -1,10 +1,20 @@
 package com.formation.emergency.domain.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+@Entity
 public class Patient extends Personne {
 
 	// TODO non obligatoire
+	@Embedded
 	private Adresse adresse;
+	@Column(name = "security_number")
 	private String numeroSecu;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "state")
 	private EtatPatient etat;
 
 	public String getNumeroSecu() {
