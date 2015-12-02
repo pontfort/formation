@@ -20,12 +20,16 @@ public class IAccueilTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
-		super.tearDown();
-		this.context = null;
-		accueil = null;
+		super.tearDown();		
 	}
-
-	public void testReceptionner() {
+	
+	
+	public void testAccueil() {
+		receptionner();
+		sortie();
+	}
+		
+	private void receptionner() {
 		try
 		{
 			Patient p1 = (Patient) context.getBean("patient1");
@@ -41,7 +45,7 @@ public class IAccueilTest extends TestCase {
 		}
 	}
 	
-	public void testSortie() {
+	private void sortie() {
 		try {
 			
 			Patient p1 = (Patient) context.getBean("patient1");
@@ -54,7 +58,7 @@ public class IAccueilTest extends TestCase {
 			System.out.println("f2 = " + f2);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			fail("IAccueilTest.testReceptionner()" + e.getMessage());
 		}				
 	}
 	

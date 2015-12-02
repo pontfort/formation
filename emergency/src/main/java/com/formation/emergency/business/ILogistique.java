@@ -5,13 +5,13 @@ import com.formation.emergency.exception.IndisponibiliteException;
 
 public interface ILogistique {
 
-	void acheter(Equipement equipement) throws IndisponibiliteException;
+	void acheter(Equipement item) throws IndisponibiliteException;
 			
-	void reparer(Equipement equipement) throws IndisponibiliteException;
+	void reparer(Equipement item) throws IndisponibiliteException;
 	
-	void retirer(Equipement equipement) throws IndisponibiliteException;
+	void retirer(Equipement item) throws IndisponibiliteException;
 	
 	Equipement mettreADisposition(String reference) throws IndisponibiliteException;
 	
-	void recuperer(Equipement equipement) throws IndisponibiliteException;
+	void recuperer(Equipement item) throws IndisponibiliteException;
 }

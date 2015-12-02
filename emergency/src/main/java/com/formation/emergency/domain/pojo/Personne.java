@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Personne {
 		
+	private String uuid;
+	
 	//TODO obligatoire
 	private Date dateNaissance;
 	
@@ -46,6 +48,14 @@ public class Personne {
 	public void setPere(Personne pere) {
 		this.pere = pere;
 	}
+	
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}	
 	
 	@Override
 	public String toString() {
