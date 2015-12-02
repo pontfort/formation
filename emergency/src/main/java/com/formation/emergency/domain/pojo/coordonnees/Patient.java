@@ -1,16 +1,15 @@
 package com.formation.emergency.domain.pojo.coordonnees;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity
+@DiscriminatorValue(value = "PATIENT")
 public class Patient extends Personne implements Serializable {
 
 	private static final long serialVersionUID = 1L;

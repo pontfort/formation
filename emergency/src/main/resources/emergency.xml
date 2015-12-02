@@ -12,18 +12,18 @@
 
 	<context:component-scan base-package="com.formation.emergency"></context:component-scan>
 
-	<bean id="pere" class="com.formation.emergency.domain.pojo.Personne">
+	<bean id="pere" class="com.formation.emergency.domain.pojo.coordonnees.Personne">
 		<property name="nom" value="Pontfort" />
 		<property name="prenom" value="Gérard" />
 	</bean>
 
-	<bean id="mere" class="com.formation.emergency.domain.pojo.Patient">
+	<bean id="mere" class="com.formation.emergency.domain.pojo.coordonnees.Patient">
 		<property name="nom" value="Mary" />
 		<property name="prenom" value="Fanfan" />
 		<property name="numeroSecu" value="BODIDIAZEROZEROZER" />
 	</bean>
 
-	<bean id="personne" class="com.formation.emergency.domain.pojo.Patient">
+	<bean id="personne" class="com.formation.emergency.domain.pojo.coordonnees.Patient">
 		<property name="etat" value="CONSULTATION" />
 		<property name="numeroSecu" value="BODIDIAZEROZEROZER" />
 		<property name="nom" value="Pontfort" />
@@ -33,7 +33,7 @@
 	<property name="mere" ref="mere" />
 	</bean>
 
-	<bean id="voiture" class="com.formation.emergency.domain.pojo.Equipement">
+	<bean id="voiture" class="com.formation.emergency.domain.pojo.equipement.Equipement">
 		<property name="etat" value="FONCTIONNEL" />
 		<property name="type" value="VOITURE" />
 		<property name="id" value="123" />
