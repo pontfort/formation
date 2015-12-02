@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +10,8 @@ import javax.persistence.Id;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity
+@DiscriminatorValue(value="PATIENT")
 public class Patient extends Personne {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 
 	@Embedded
 	private Adresse adresse;
@@ -43,14 +41,6 @@ public class Patient extends Personne {
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Override

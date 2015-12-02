@@ -1,23 +1,12 @@
 package com.formation.emergency.domain.pojo;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("ORDONNANCE")
 public class Ordonnance extends FeuilleSortie {
 
-	@EmbeddedId
-	private Adresse adresse;
-
 	private String prescription;
-
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
 
 	public String getPrescription() {
 		return prescription;

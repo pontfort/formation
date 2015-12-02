@@ -2,7 +2,12 @@ package com.formation.emergency.domain.pojo;
 
 import java.util.Date;
 
-public class ActeNaissance extends FeuilleSortie {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("ACTE_NAISSANCE")
+public class ActeNaissance extends Act {
 
 	private Date dateNaissance;
 
