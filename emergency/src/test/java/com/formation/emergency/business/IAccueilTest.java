@@ -3,8 +3,8 @@ package com.formation.emergency.business;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Patient;
+import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 
 import junit.framework.TestCase;
 

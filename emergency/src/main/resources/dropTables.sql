@@ -1,0 +1,2 @@
+--drop database emergencyjulien;
+--create database emergencyjulien;

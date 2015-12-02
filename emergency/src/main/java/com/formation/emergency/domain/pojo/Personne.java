@@ -1,21 +1,66 @@
 package com.formation.emergency.domain.pojo;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
+
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Personne {
 		
-	private String uuid;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 	
-	//TODO obligatoire
+	private String uuid;
+		
 	private Date dateNaissance;
 	
 	private String nom;
 	
 	private String prenom;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn
 	private Personne mere;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn
 	private Personne pere;
+	
+	@OneToMany(mappedBy="mere", cascade={CascadeType.PERSIST, CascadeType.REMOVE})	
+	private Set<Personne> enfants;
+	  
+//  (Cas 1)	-> La FK vers la personne est dans feuille de sortie
+//	(Cas 2)	-> La reference est porté par une table personne_feuillesortie qui contient les primary keys de Personne et FeuilleSortie 
+//	@OneToMany(mappedBy="personne", cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
+	private Set<FeuilleSortie> feuilles;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getNom() {
 		return nom;
@@ -36,6 +81,7 @@ public class Personne {
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
+	
 	public Personne getMere() {
 		return mere;
 	}
@@ -55,13 +101,29 @@ public class Personne {
 
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
-	}	
+	}
+	
+	public Set<Personne> getEnfants() {
+		return enfants;
+	}
+
+	public void setEnfants(Set<Personne> enfants) {
+		this.enfants = enfants;
+	}
+	
+	public Set<FeuilleSortie> getFeuilles() {
+		return feuilles;
+	}
+
+	public void setFeuilles(Set<FeuilleSortie> feuilles) {
+		this.feuilles = feuilles;
+	}
 	
 	@Override
 	public String toString() {
 		return nom + " " + prenom
 			 + (mere != null ? "\nmere = " + mere : "")
 			 + (pere != null ? "\npere = " + pere : "");
-	}
+	}	
 	
 }

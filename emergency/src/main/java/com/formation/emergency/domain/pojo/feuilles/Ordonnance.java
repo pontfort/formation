@@ -1,14 +1,14 @@
-package com.formation.emergency.domain.pojo;
+package com.formation.emergency.domain.pojo.feuilles;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Ordonnance extends FeuilleSortie {
-
-	@EmbeddedId
-	private Adresse adresse;
-
+	
 	private String prescriptions;
 
 	public Ordonnance() {
@@ -26,16 +26,8 @@ public class Ordonnance extends FeuilleSortie {
 
 	public void setPrescriptions(String prescriptions) {
 		this.prescriptions = prescriptions;
-	}
-
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
-
+	}	
+	
 	@Override
 	public String toString() {
 		return "Ordonnance";

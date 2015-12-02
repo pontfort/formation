@@ -12,8 +12,10 @@ public class Adresse implements Serializable{
 	private String adresse2;
 	private String cp;
 	private String ville;
+	
 	public Adresse() {
 	}
+	
 	public String getAdresse1() {
 		return adresse1;
 	}
