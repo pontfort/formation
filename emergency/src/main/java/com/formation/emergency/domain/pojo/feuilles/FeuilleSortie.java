@@ -3,6 +3,9 @@ package com.formation.emergency.domain.pojo.feuilles;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +16,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TypeFeuille", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue(value="FEUILLE")
 public abstract class FeuilleSortie {
 
 	@Id

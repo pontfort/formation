@@ -1,6 +1,7 @@
 package com.formation.emergency.domain.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity
+@DiscriminatorValue(value="PATIENT")
 public class Patient extends Personne {
 
 	@Embedded

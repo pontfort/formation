@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +20,9 @@ import javax.persistence.OneToMany;
 import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TypePersonne", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue(value="PERSONNE")
 public class Personne {
 		
 	/**

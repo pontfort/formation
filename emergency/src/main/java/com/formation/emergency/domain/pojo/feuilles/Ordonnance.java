@@ -1,12 +1,10 @@
 package com.formation.emergency.domain.pojo.feuilles;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
+@DiscriminatorValue(value="ORDONNANCE")
 public class Ordonnance extends FeuilleSortie {
 	
 	private String prescriptions;

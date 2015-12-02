@@ -2,11 +2,13 @@ package com.formation.emergency.domain.pojo.feuilles;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import com.formation.emergency.domain.pojo.Patient;
 
 @Entity
+@DiscriminatorValue(value="ACTENAISSANCE")
 public class ActeNaissance extends Acte {
 
 	private transient Patient patient;
