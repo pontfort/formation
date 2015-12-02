@@ -4,8 +4,8 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.formation.emergency.domain.pojo.FeuilleSortie;
-import com.formation.emergency.domain.pojo.Patient;
+import com.formation.emergency.domain.pojo.coordonnees.Patient;
+import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 
 import junit.framework.TestCase;
 

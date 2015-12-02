@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.formation.emergency.business.ILogistique;
 import com.formation.emergency.domain.dao.IRepository;
-import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.code.EtatEquipement;
+import com.formation.emergency.domain.pojo.equipement.Equipement;
 import com.formation.emergency.exception.IndisponibiliteException;
 import com.formation.emergency.exception.code.Indisponibilite;
 

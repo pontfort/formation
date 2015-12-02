@@ -2,8 +2,8 @@ package com.formation.emergency.business;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.code.EtatEquipement;
+import com.formation.emergency.domain.pojo.equipement.Equipement;
 
 import junit.framework.TestCase;
 
@@ -27,7 +27,12 @@ public class ILogistiqueTest extends TestCase {
 		context = null;
 	}
 
-	public void testAcheter() {
+	public void testAll() {
+		acheter();
+		reparer();
+	}
+
+	public void acheter() {
 		try {
 			Equipement voiture = (Equipement) context.getBean("voiture");
 			logistique.acheter(voiture);
@@ -39,7 +44,7 @@ public class ILogistiqueTest extends TestCase {
 		}
 	}
 
-	public void testReparer() {
+	public void reparer() {
 		try {
 			Equipement voiture = (Equipement) context.getBean("voiture");
 			logistique.acheter(voiture);

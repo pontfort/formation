@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.formation.emergency.domain.pojo.Equipement;
+import com.formation.emergency.domain.pojo.equipement.Equipement;
 
 @Repository("logistiqueDao")
 public class LogistiqueDAO implements IRepository<Equipement> {

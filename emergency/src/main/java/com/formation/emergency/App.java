@@ -4,8 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.formation.emergency.business.IAccueil;
-import com.formation.emergency.domain.pojo.Patient;
-import com.formation.emergency.domain.pojo.Personne;
+import com.formation.emergency.domain.pojo.coordonnees.Patient;
+import com.formation.emergency.domain.pojo.coordonnees.Personne;
 import com.formation.emergency.exception.RechercheException;
 
 /**

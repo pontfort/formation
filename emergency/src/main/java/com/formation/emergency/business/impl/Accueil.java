@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.formation.emergency.business.IAccueil;
 import com.formation.emergency.domain.dao.IRepository;
-import com.formation.emergency.domain.pojo.ActeDeces;
-import com.formation.emergency.domain.pojo.ActeNaissance;
-import com.formation.emergency.domain.pojo.Consultation;
-import com.formation.emergency.domain.pojo.FeuilleSortie;
-import com.formation.emergency.domain.pojo.Ordonnance;
-import com.formation.emergency.domain.pojo.Patient;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
+import com.formation.emergency.domain.pojo.coordonnees.Patient;
+import com.formation.emergency.domain.pojo.feuilles.ActeDeces;
+import com.formation.emergency.domain.pojo.feuilles.ActeNaissance;
+import com.formation.emergency.domain.pojo.feuilles.Consultation;
+import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
+import com.formation.emergency.domain.pojo.feuilles.Ordonnance;
 import com.formation.emergency.exception.RechercheException;
 import com.formation.emergency.exception.code.Recherche;
 

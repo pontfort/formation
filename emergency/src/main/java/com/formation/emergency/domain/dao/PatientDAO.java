@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.formation.emergency.domain.pojo.Patient;
+import com.formation.emergency.domain.pojo.coordonnees.Patient;
 
 public class PatientDAO implements IRepository<Patient> {
 

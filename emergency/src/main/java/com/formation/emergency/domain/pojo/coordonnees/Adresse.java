@@ -1,4 +1,4 @@
-package com.formation.emergency.domain.pojo;
+package com.formation.emergency.domain.pojo.coordonnees;
 
 import java.io.Serializable;
 

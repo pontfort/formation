@@ -1,24 +1,25 @@
-package com.formation.emergency.domain.pojo;
+package com.formation.emergency.domain.pojo.coordonnees;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity
-public class Patient extends Personne {
+public class Patient extends Personne implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private static final long serialVersionUID = 1L;
 
 	@Embedded
 	private Adresse adresse;
 
 	private String numeroSecu;
+
 	private EtatPatient etat;
 
 	public EtatPatient getEtat() {
@@ -43,14 +44,6 @@ public class Patient extends Personne {
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Override
