@@ -1,6 +1,6 @@
 package com.formation.emergency.domain.dao;
 
-public interface IDao<T> {
+public interface IRepository<T> {
 
 	void create(T object);
 	

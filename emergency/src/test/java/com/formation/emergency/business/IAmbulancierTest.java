@@ -25,7 +25,7 @@ public class IAmbulancierTest extends TestCase {
 			Adresse depart = new Adresse();
 			Adresse arrivee = new Adresse();
 			
-			ambulancier.transporter(patient, depart, arrivee);
+			
 		}
 		catch (Exception ex)
 		{

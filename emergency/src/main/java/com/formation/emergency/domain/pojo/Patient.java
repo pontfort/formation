@@ -1,21 +1,49 @@
 package com.formation.emergency.domain.pojo;
 
-import java.sql.Date;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
+@Entity
+@Table(indexes={
+		@Index(name="Index_NumeroSecu_Patient",unique=true, columnList="NumeroSecu_Patient")
+})
+@AttributeOverrides({    
+    @AttributeOverride(name = "nom", column = @Column(name = "Nom_Patient")),
+    @AttributeOverride(name = "prenom", column = @Column(name = "Prenom_Patient")),
+    @AttributeOverride(name = "dateNaissance", column = @Column(name = "DateNaissance_Patient"))
+})
 public class Patient extends Personne {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Id_Patient")
+	private int id;
 	
-	//TODO non obligatoire
+	@Embedded
+	@AttributeOverrides({
+	    @AttributeOverride(name = "numero", column = @Column(name = "Numero_Patient")),                       
+	    @AttributeOverride(name = "rue", column = @Column(name = "Rue_Patient")),
+	    @AttributeOverride(name = "codePostal", column = @Column(name = "CodePostal_Patient")),
+	    @AttributeOverride(name = "ville", column = @Column(name = "Ville_Patient"))
+	})
 	private Adresse adresse;
-	private String numeroSecu;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="Etat_Patient")
 	private EtatPatient etatPatient;
 	
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
+	@Column(name="NumeroSecu_Patient", length=50, nullable=false)
+	private String numeroSecu;
 
 	public String getNumeroSecu() {
 		return numeroSecu;
@@ -23,6 +51,14 @@ public class Patient extends Personne {
 
 	public void setNumeroSecu(String numeroSecu) {
 		this.numeroSecu = numeroSecu;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 	public EtatPatient getEtatPatient() {
@@ -33,4 +69,12 @@ public class Patient extends Personne {
 		this.etatPatient = etatPatient;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }

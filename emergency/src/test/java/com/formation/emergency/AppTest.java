@@ -1,5 +1,10 @@
 package com.formation.emergency;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.formation.emergency.domain.pojo.Personne;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +38,10 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+    	ApplicationContext app = new ClassPathXmlApplicationContext("emergency.xml");
+        Personne p = (Personne) app.getBean("personne");
+    	System.out.println(p.getNom());
+    	
+    	assertTrue( true );
     }
 }
