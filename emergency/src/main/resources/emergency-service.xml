@@ -11,7 +11,10 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil">
-		<property name="patientDao" ref="patientDao" />
+		<property name="patientDao" ref="patientDaoJPA" />
 	</bean>
 
+	<bean id="logistique" class="com.formation.emergency.business.impl.Logistique">
+		<property name="logistiqueDao" ref="equipementDaoJPA"></property>
+	</bean>
 </beans>

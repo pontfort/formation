@@ -1,11 +1,16 @@
 package com.formation.emergency.business;
 
+import java.util.UUID;
+
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.formation.emergency.domain.dao.IRepository;
 import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Patient;
+import com.formation.emergency.domain.pojo.Personne;
+import com.formation.emergency.exception.RechercheException;
 
 import junit.framework.TestCase;
 
@@ -30,16 +35,12 @@ public class IAccueilTest extends TestCase {
 		context = null;
 	}
 
-	public void testReceptionner() {
-		try {
-			Patient person = (Patient) context.getBean("personne");
-			accueil.receptionner(person);
+	public void testReceptionner() throws RechercheException {
+		Patient person = (Patient) context.getBean("personne");
+		accueil.receptionner(person);
 
-			assertTrue(true);
+		assertTrue(true);
 
-		} catch (Exception ex) {
-			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
-		}
 	}
 
 	public void testsortie() {
@@ -58,4 +59,23 @@ public class IAccueilTest extends TestCase {
 		}
 	}
 
+	public void testUpdate() {
+
+		try {
+			Patient person = (Patient) context.getBean("personne");
+			accueil.receptionner(person);
+
+			String newNumSecu = UUID.randomUUID().toString();
+			person.setNumeroSecu(newNumSecu);
+
+			accueil.mettreAJour(person);
+
+			Patient newPerson =(Patient) accueil.cherche(person.getId());
+
+			assertTrue(newPerson.getNumeroSecu().compareTo(newNumSecu)==0);
+
+		} catch (Exception ex) {
+			fail("IAccueilTest.testsortie()" + ex.getMessage());
+		}
+	}
 }

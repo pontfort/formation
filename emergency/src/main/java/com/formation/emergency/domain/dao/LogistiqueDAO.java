@@ -15,7 +15,7 @@ public class LogistiqueDAO implements IRepository<Equipement> {
 
 	@Override
 	public void create(Equipement object) {
-		equipements.put(object.getId(), object);
+		equipements.put(((Equipement)object).getId(), ((Equipement)object));
 	}
 
 	@Override

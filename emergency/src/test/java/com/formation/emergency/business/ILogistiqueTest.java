@@ -1,9 +1,14 @@
 package com.formation.emergency.business;
 
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.code.EtatEquipement;
+import com.formation.emergency.domain.pojo.code.TypeEquipement;
+import com.formation.emergency.exception.IndisponibiliteException;
 
 import junit.framework.TestCase;
 
@@ -27,20 +32,17 @@ public class ILogistiqueTest extends TestCase {
 		context = null;
 	}
 
-	public void testAcheter() {
-		try {
+	@Test
+	public void testAcheter() throws IndisponibiliteException {
 			Equipement voiture = (Equipement) context.getBean("voiture");
 			logistique.acheter(voiture);
 
 			assertTrue(true);
 
-		} catch (Exception ex) {
-			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
-		}
 	}
 
-	public void testReparer() {
-		try {
+	@Test
+	public void testReparer() throws IndisponibiliteException {
 			Equipement voiture = (Equipement) context.getBean("voiture");
 			logistique.acheter(voiture);
 
@@ -49,24 +51,56 @@ public class ILogistiqueTest extends TestCase {
 
 			assertTrue(true);
 
-		} catch (Exception ex) {
-			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
-		}
 	}
 
-	public void testPasReparer() {
-		try {
+	@Test
+	public void testPasReparer() throws IndisponibiliteException {
 			Equipement voiture = (Equipement) context.getBean("voiture");
+			voiture.setEtat(EtatEquipement.CASSE);
 			logistique.acheter(voiture);
 
 			logistique.reparer(voiture);
 
-			assertFalse(true);
 
-		} catch (Exception ex) {
-			assertTrue(true);
-			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
-		}
+}
+
+	@Test
+	public void testRetirer() throws IndisponibiliteException {
+			Equipement voiture =new Equipement();
+			voiture.setType(TypeEquipement.BUREAU);
+			voiture.setEtat(EtatEquipement.FONCTIONNEL);
+			
+			logistique.acheter(voiture);
+
+
+			logistique.retirer(voiture);
+
+
+	}
+
+	@Test
+	public void testRecuperer() throws IndisponibiliteException {
+			Equipement voiture =new Equipement();
+			voiture.setType(TypeEquipement.BUREAU);
+			voiture.setEtat(EtatEquipement.FONCTIONNEL);
+			
+			logistique.acheter(voiture);
+
+
+			logistique.recuperer(voiture);
+	}
+
+	@Test
+	public void testMettreADisposition() throws IndisponibiliteException {
+			Equipement voiture =new Equipement();
+			voiture.setType(TypeEquipement.BUREAU);
+			voiture.setEtat(EtatEquipement.FONCTIONNEL);
+			
+			logistique.acheter(voiture);
+
+
+			logistique.mettreADisposition(voiture);
+
 	}
 
 }

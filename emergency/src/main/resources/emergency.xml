@@ -36,7 +36,6 @@
 	<bean id="voiture" class="com.formation.emergency.domain.pojo.Equipement">
 		<property name="etat" value="FONCTIONNEL" />
 		<property name="type" value="VOITURE" />
-		<property name="id" value="123" />
 	</bean>
 
 	<import resource="emergency-dao.xml" />

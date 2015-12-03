@@ -11,11 +11,8 @@ import com.formation.emergency.domain.pojo.code.EtatEquipement;
 import com.formation.emergency.exception.IndisponibiliteException;
 import com.formation.emergency.exception.code.Indisponibilite;
 
-@Service("logistique")
 public class Logistique implements ILogistique {
 
-	@Autowired
-	@Qualifier("logistiqueDao")
 	private IRepository<Equipement> logistiqueDao;
 
 	@Override

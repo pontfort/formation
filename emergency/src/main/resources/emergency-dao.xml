@@ -10,8 +10,14 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="patientDao" class="com.formation.emergency.domain.dao.PatientDAO" />
-
+	<bean id="patientDaoMemory" class="com.formation.emergency.domain.dao.PatientDAO" />
+ 	<bean id="patientDaoJPA" class="com.formation.emergency.domain.dao.PatientDaoJpa"></bean>
+ 
+ 	<bean id="equipementDaoMemory" class="com.formation.emergency.domain.dao.LogistiqueDAO" />
+ 	<bean id="equipementDaoJPA" class="com.formation.emergency.domain.dao.LogitiqueDaoJpa"></bean>
+ 	
+ 	<bean id="equipmentSelector" class="com.formation.emergency.domain.dao.Impl.EquipmentSelectorImpl"></bean>
+ 	
 	<!-- DB connection -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -31,7 +37,7 @@
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">false</prop>
 			</props>

@@ -3,16 +3,25 @@ package com.formation.emergency.domain.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.Patient;
 
 public class PatientDAO implements IRepository<Patient> {
 
-	private Map<String, Patient> patients;
+	Map<String,Patient> dataSource= new HashMap<String,Patient>();
 
 	@Override
 	public void create(Patient object) {
-		getPatients().put(object.getUID(), object);
+		// TODO Auto-generated method stub
+		this.dataSource.put(((Patient)object).getNumeroSecu(), ((Patient)object));
 	}
 
 	@Override
@@ -42,9 +51,7 @@ public class PatientDAO implements IRepository<Patient> {
 	}
 
 	public Map<String, Patient> getPatients() {
-		if (patients == null)
-			patients = new HashMap<String, Patient>();
-		return patients;
+		return null;
 
 	}
 

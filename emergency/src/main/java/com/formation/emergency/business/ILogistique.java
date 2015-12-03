@@ -14,5 +14,4 @@ public interface ILogistique {
 	public void recuperer(Equipement equipement) throws IndisponibiliteException;
 
 	Equipement mettreADisposition(Object refEquipement) throws IndisponibiliteException;
-
 }

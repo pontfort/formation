@@ -3,14 +3,19 @@ package com.formation.emergency.domain.pojo;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+import com.formation.emergency.domain.dao.QueriesDictionary;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity
-@DiscriminatorValue(value="PATIENT")
+@DiscriminatorValue(value = "PATIENT")
+@NamedQueries({
+		@NamedQuery(name = QueriesDictionary.PATIENT_UPDATE_NUMSECU, query = "UPDATE Patient p SET p.numeroSecu=:"
+				+ QueriesDictionary.PATIENT_QUERYPARAM_NUMSECU + " WHERE p.id=:" + QueriesDictionary.PATIENT_QUERYPARAM_ID),
+		@NamedQuery(name = QueriesDictionary.PATIENT_DELETE, query = "DELETE Patient p WHERE p.id=:"
+				+ QueriesDictionary.PATIENT_QUERYPARAM_ID) })
 public class Patient extends Personne {
 
 	@Embedded

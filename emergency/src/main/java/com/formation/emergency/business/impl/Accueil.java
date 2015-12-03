@@ -10,13 +10,13 @@ import com.formation.emergency.domain.pojo.Consultation;
 import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Ordonnance;
 import com.formation.emergency.domain.pojo.Patient;
+import com.formation.emergency.domain.pojo.Personne;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 import com.formation.emergency.exception.RechercheException;
 import com.formation.emergency.exception.code.Recherche;
 
 public class Accueil implements IAccueil {
 
-	@Autowired
 	private IRepository<Patient> patientDao;
 
 	@Override
@@ -33,9 +33,9 @@ public class Accueil implements IAccueil {
 			throw new RechercheException(Recherche.NULL, "Le petient n'existe pas !");
 
 		EtatPatient etat = patient.getEtat();
-		patientDao.delete(patient.getUID());
+		patientDao.delete(patient.getId());
 
-		patient = patientDao.find(patient.getUID());
+		patient = patientDao.find(patient.getId());
 
 		// attention il existe tjrs ?!
 		if (patient != null)
@@ -66,6 +66,16 @@ public class Accueil implements IAccueil {
 
 	public void setPatientDao(IRepository<Patient> patientDao) {
 		this.patientDao = patientDao;
+	}
+
+	@Override
+	public Personne cherche(Integer id) {
+		return		this.patientDao.find(id);
+	}
+
+	@Override
+	public void mettreAJour(Personne person) {
+		this.patientDao.update((Patient) person);
 	}
 
 }
