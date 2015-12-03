@@ -1,16 +1,34 @@
 package com.formation.emergency.domain.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING)
 public class Personne {
 		
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Id_Patient")
+	private int id;
+	
 	@Column(name="Nom_Personne")
 	private String nom;
 	
@@ -21,11 +39,23 @@ public class Personne {
 	@Column(name="DateNaissance_Personne")
 	private Date dateNaissance;
 	
-	@Transient
+	@ManyToOne
 	private Personne mere;
 	
-	@Transient
+	@ManyToOne
 	private Personne pere;
+
+	@OneToMany
+	@JoinColumn(name="mere_enfant")
+	private List<Personne> enfants = new ArrayList<Personne>();
+	
+	public List<Personne> getEnfants() {
+		return enfants;
+	}
+
+	public void setEnfants(List<Personne> enfants) {
+		this.enfants = enfants;
+	}
 
 	public String getNom() {
 		return nom;
@@ -66,5 +96,13 @@ public class Personne {
 	public void setPere(Personne pere) {
 		this.pere = pere;
 	}
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 }

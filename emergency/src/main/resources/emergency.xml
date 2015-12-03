@@ -15,7 +15,5 @@
 	<!-- Import conf SERVICE -->
 	<import resource="emergency-service.xml" />
 
-
-
 </beans>
                            

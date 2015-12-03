@@ -16,8 +16,7 @@ public class Accueil implements IAccueil {
 	
 	@Override
 	public boolean receptionner(Patient patient) throws RechercheException {
-		// TODO Auto-generated method stub
-		
+
 		if(patient == null || patient.getNumeroSecu() == null)
 		{
 			throw new RechercheException();
@@ -40,6 +39,7 @@ public class Accueil implements IAccueil {
 				f= new ActeDeces();
 				break;
 			case NAISSANCE:
+				patientDao.update(patient);
 				f= new ActeNaissance();
 				break;
 			default:

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.formation.emergency.domain.pojo.Patient;
 
-public class PatientDao implements IRepository<Patient> {
+public class PatientDaoMemory implements IRepository<Patient> {
 
 	Map<String, Patient> patients = new HashMap<String, Patient>();
 	

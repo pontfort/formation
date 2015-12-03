@@ -12,7 +12,7 @@ public class EquipementDao implements IRepository<Equipement> {
 
 	@Override
 	public void create(Equipement equipement) {
-		equipements.put(equipement.getReference(), equipement);
+		//equipements.put(equipement.getReference(), equipement);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class EquipementDao implements IRepository<Equipement> {
 
 	@Override
 	public void update(Equipement equipement) {
-		equipements.put(equipement.getReference(), equipement);
+		//equipements.put(equipement.getReference(), equipement);
 	}
 
 	@Override

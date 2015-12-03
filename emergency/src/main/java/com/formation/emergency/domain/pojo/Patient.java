@@ -3,6 +3,7 @@ package com.formation.emergency.domain.pojo;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
@@ -22,13 +25,12 @@ import javax.persistence.Table;
     @AttributeOverride(name = "prenom", column = @Column(name = "Prenom_Patient")),
     @AttributeOverride(name = "dateNaissance", column = @Column(name = "DateNaissance_Patient"))
 })
+@DiscriminatorValue("PATIENT")
+@NamedQueries({
+	@NamedQuery(name="updateEtat", query="Update Patient p SET p.etat = :pEtat where p.id = :pId")
+})
 public class Patient extends Personne {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Id_Patient")
-	private int id;
-	
 	@Embedded
 	@AttributeOverrides({
 	    @AttributeOverride(name = "numero", column = @Column(name = "Numero_Patient")),                       
@@ -67,14 +69,6 @@ public class Patient extends Personne {
 
 	public void setEtatPatient(EtatPatient etatPatient) {
 		this.etatPatient = etatPatient;
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 }

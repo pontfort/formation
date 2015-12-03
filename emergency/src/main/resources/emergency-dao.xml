@@ -7,7 +7,7 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="daoPatient" class="com.formation.emergency.domain.dao.PatientDao" />
-	
+	<bean id="daoPatientMemory" class="com.formation.emergency.domain.dao.PatientDaoMemory" />
+	<bean id="daoPatientJpa" class="com.formation.emergency.domain.dao.PatientDaoJpa" />
 </beans>
                            
