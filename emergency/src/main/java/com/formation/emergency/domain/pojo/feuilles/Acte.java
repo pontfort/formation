@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value = "ACTE")
-public class Acte extends FeuilleSortie {
+public abstract class Acte extends FeuilleSortie {
 
 	@Column(name = "date_acte")
 	private Date dateActe;

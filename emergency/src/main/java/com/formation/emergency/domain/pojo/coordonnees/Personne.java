@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo.coordonnees;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
 import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
@@ -24,6 +30,11 @@ import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator_personne", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "PERSONNE")
+@NamedEntityGraphs({ @NamedEntityGraph(name = "withMere", attributeNodes = { @NamedAttributeNode("mere") }),
+		@NamedEntityGraph(name = "withChildren", attributeNodes = {
+				@NamedAttributeNode(value = "children", subgraph = "withFeuilleSortie") }, subgraphs = {
+						@NamedSubgraph(name = "withFeuilleSortie", attributeNodes = {
+								@NamedAttributeNode("feuilleSorties") }) }) })
 public class Personne {
 
 	@Id
@@ -41,17 +52,17 @@ public class Personne {
 	private Date dateNaissance;
 
 	@JoinColumn(name = "mere_child")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Personne mere;
 
 	@JoinColumn(name = "pere")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Personne pere;
 
-	@OneToMany(mappedBy = "mere", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	private List<Personne> children;
+	@OneToMany(mappedBy = "mere", cascade = CascadeType.ALL)
+	private List<Personne> children = new ArrayList<Personne>();
 
-	@OneToMany(mappedBy = "personne", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "personne", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<FeuilleSortie> feuilleSorties;
 
 	public List<FeuilleSortie> getFeuilleSorties() {

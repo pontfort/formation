@@ -1,18 +1,21 @@
 package com.formation.emergency.domain.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.formation.emergency.domain.pojo.code.EtatEquipement;
 import com.formation.emergency.domain.pojo.coordonnees.Patient;
+import com.formation.emergency.domain.pojo.equipement.Equipement;
 
-public class PatientDAO implements IRepository<Patient> {
+public class PatientDAO extends DaoJpa implements IRepository<Patient> {
 
 	private Map<String, Patient> patients;
 
 	@Override
-	public void create(Patient object) {
-		getPatients().put(object.getUID(), object);
+	public void create(Object object) {
+		getPatients().put(((Patient) object).getUID(), (Patient) object);
 	}
 
 	@Override
@@ -46,6 +49,13 @@ public class PatientDAO implements IRepository<Patient> {
 			patients = new HashMap<String, Patient>();
 		return patients;
 
+	}
+
+
+	@Override
+	public List<Equipement> findByStemming(Date min, Date max, EtatEquipement etat, String pays, String chaine) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,10 +1,15 @@
 package com.formation.emergency.business.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.formation.emergency.business.IAccueil;
 import com.formation.emergency.domain.dao.IRepository;
+import com.formation.emergency.domain.dao.IRepositoryGenric;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
+import com.formation.emergency.domain.pojo.constante.IQueryConstante;
 import com.formation.emergency.domain.pojo.coordonnees.Patient;
 import com.formation.emergency.domain.pojo.feuilles.ActeDeces;
 import com.formation.emergency.domain.pojo.feuilles.ActeNaissance;
@@ -16,14 +21,24 @@ import com.formation.emergency.exception.code.Recherche;
 
 public class Accueil implements IAccueil {
 
-	@Autowired
 	private IRepository<Patient> patientDao;
 
 	@Override
 	public boolean receptionner(Patient patient) throws RechercheException {
 		if (patient == null)
 			throw new RechercheException(Recherche.NULL, "Le petient n'existe pas !");
-		patientDao.create(patient);
+
+		if (patient.getId() != null) {
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(IQueryConstante.PARAM_ETAT, patient.getEtat());
+			params.put(IQueryConstante.PARAM_NUMEROSECU, patient.getNumeroSecu());
+			params.put(IQueryConstante.PARAM_DATENAISSANCE, patient.getDateNaissance());
+			params.put(IQueryConstante.PARAM_ID, patient.getId());
+			params.put(IQueryConstante.PARAM_NOM, patient.getNom());
+			params.put(IQueryConstante.PARAM_PRENOM, patient.getPrenom());
+			((IRepositoryGenric) patientDao).executeQuery(IQueryConstante.PATIENT_UPDATE, params);
+		} else
+			patientDao.create(patient);
 		return true;
 	}
 
@@ -33,9 +48,9 @@ public class Accueil implements IAccueil {
 			throw new RechercheException(Recherche.NULL, "Le petient n'existe pas !");
 
 		EtatPatient etat = patient.getEtat();
-		patientDao.delete(patient.getUID());
+		patientDao.delete(patient.getId());
 
-		patient = patientDao.find(patient.getUID());
+		patient = patientDao.find(patient);
 
 		// attention il existe tjrs ?!
 		if (patient != null)
