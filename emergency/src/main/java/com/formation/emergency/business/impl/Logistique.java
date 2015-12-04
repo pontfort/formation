@@ -1,8 +1,6 @@
 package com.formation.emergency.business.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.emergency.business.ILogistique;
 import com.formation.emergency.domain.dao.IRepository;
@@ -11,6 +9,7 @@ import com.formation.emergency.domain.pojo.code.EtatEquipement;
 import com.formation.emergency.exception.IndisponibiliteException;
 import com.formation.emergency.exception.code.Indisponibilite;
 
+@Transactional
 public class Logistique implements ILogistique {
 
 	private IRepository<Equipement> logistiqueDao;

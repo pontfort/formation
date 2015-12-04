@@ -2,15 +2,50 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:component-scan base-package="com.formation.emergency"></context:component-scan>
+
+	<aop:config>
+	    <aop:pointcut id="dao" expression="execution(* com.formation.emergency.domain.dao.*DAO*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="dao"/>
+	</aop:config>
+
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="myEmf"></property>
+	</bean>
+	
+	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean 
+		below) -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- all methods starting with 'get' are read-only -->
+			<tx:method name="get*" read-only="true" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+
+
+
 
 	<bean id="pere" class="com.formation.emergency.domain.pojo.Personne">
 		<property name="nom" value="Pontfort" />
@@ -41,4 +76,16 @@
 	<import resource="emergency-dao.xml" />
 	<import resource="emergency-service.xml" />
 
+	<!-- <bean id="writer" class="com.formation.emergency.aop.Writer"></bean> -->
+
+	<bean id="triggerInsterceptor" class="com.formation.emergency.aop.Trigger"></bean>
+
+	<aop:config>
+		<aop:aspect id="triggerAspect" ref="triggerInsterceptor">
+			<aop:pointcut
+				expression="execution(* com.formation.emergency.business.IAccueil.*(..))"
+				id="acceuilTriggerPointCut" />
+			<aop:around pointcut-ref="acceuilTriggerPointCut" method="aroundExecution" />
+		</aop:aspect>
+	</aop:config>
 </beans>

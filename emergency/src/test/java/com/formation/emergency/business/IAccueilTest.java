@@ -6,6 +6,7 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.formation.emergency.business.impl.Accueil;
 import com.formation.emergency.domain.dao.IRepository;
 import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Patient;

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.formation.emergency.domain.pojo.Equipement;
 
 public class GenericRepository implements IGenericRepository {
-	@Autowired
-	private EntityManagerFactory emf;
-
-	public EntityManagerFactory getEmf() {		return emf;	}
-	public void setEmf(EntityManagerFactory emf) {		this.emf = emf;	}
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
-	public List<?> ExecuteQuery(String namedQuery, Map<String, Object> parameters) {
-		EntityManager em = this.emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
+	public List<?> ExecuteQuery(String namedQuery, Map<String, Object> parameters) throws Exception {
 		List<?> res=null;
-		try {
-			tx.begin();
 			Query q = em.createNamedQuery(namedQuery);
 			for (Entry<String, Object> item : parameters.entrySet()) {
 				q.setParameter(item.getKey(), item.getValue());
@@ -37,12 +31,21 @@ public class GenericRepository implements IGenericRepository {
 			else
 				q.executeUpdate();
 			
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-			System.out.println(e.toString());
-		}
-		return res;
+				return res;
+	}
+
+	/**
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
+
+	/**
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 	
 	/*@Override

@@ -11,10 +11,10 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<bean id="patientDaoMemory" class="com.formation.emergency.domain.dao.PatientDAO" />
- 	<bean id="patientDaoJPA" class="com.formation.emergency.domain.dao.PatientDaoJpa"></bean>
+ 	<bean id="patientDaoJPA" class="com.formation.emergency.domain.dao.PatientDAOJpa"></bean>
  
  	<bean id="equipementDaoMemory" class="com.formation.emergency.domain.dao.LogistiqueDAO" />
- 	<bean id="equipementDaoJPA" class="com.formation.emergency.domain.dao.LogitiqueDaoJpa"></bean>
+ 	<bean id="equipementDaoJPA" class="com.formation.emergency.domain.dao.LogitiqueDAOJpa"></bean>
  	
  	<bean id="equipmentSelector" class="com.formation.emergency.domain.dao.Impl.EquipmentSelectorImpl"></bean>
  	

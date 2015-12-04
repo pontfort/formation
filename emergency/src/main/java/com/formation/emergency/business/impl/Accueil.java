@@ -1,6 +1,6 @@
 package com.formation.emergency.business.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.emergency.business.IAccueil;
 import com.formation.emergency.domain.dao.IRepository;
@@ -15,6 +15,7 @@ import com.formation.emergency.domain.pojo.code.EtatPatient;
 import com.formation.emergency.exception.RechercheException;
 import com.formation.emergency.exception.code.Recherche;
 
+@Transactional
 public class Accueil implements IAccueil {
 
 	private IRepository<Patient> patientDao;

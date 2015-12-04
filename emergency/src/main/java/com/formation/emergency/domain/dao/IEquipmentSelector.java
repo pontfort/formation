@@ -8,5 +8,5 @@ import com.formation.emergency.domain.pojo.code.TypeEquipement;
 
 public interface IEquipmentSelector {
 	public List<Equipement> findByCriteria(Date dateMin,Date dateMax, EtatEquipement etat,TypeEquipement type,
-									String paysOrigine, String letters);
+									String paysOrigine, String letters) throws Exception;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,14 +19,27 @@ import com.formation.emergency.domain.pojo.code.EtatEquipement;
 import com.formation.emergency.domain.pojo.code.TypeEquipement;
 
 public class EquipmentSelectorImpl implements IEquipmentSelector {
-	@Autowired
-	private EntityManagerFactory emf;
+	@PersistenceContext
+	private EntityManager em;
+
+	/**
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
+
+	/**
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	@Override
 	public List<Equipement> findByCriteria(Date dateMin, Date dateMax, EtatEquipement etat, TypeEquipement type,
-			String paysOrigine, String letters) {
-		CriteriaBuilder cb = emf.getCriteriaBuilder();
-		EntityManager em = emf.createEntityManager();
+			String paysOrigine, String letters) throws Exception {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Equipement> q = cb.createQuery(Equipement.class);
 		Root<Equipement> c = q.from(Equipement.class);
 
