@@ -75,7 +75,7 @@ public class EquipementDaoJPA extends DaoJPA implements IDaoEquipement, IDao<Equ
 		Query query =this.getEm().createQuery(queryStr);
 		
 		if (predicates != null) {
-			noParam = 0;
+			noParam = 1;
 			for (Predicate predicate : predicates) {
 				query.setParameter(noParam++,  predicate.getFieldValue());				
 			}				
