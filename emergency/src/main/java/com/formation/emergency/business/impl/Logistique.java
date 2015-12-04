@@ -1,8 +1,6 @@
 package com.formation.emergency.business.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.emergency.business.ILogistique;
 import com.formation.emergency.domain.dao.IDao;
@@ -12,43 +10,51 @@ import com.formation.emergency.exception.IndisponibiliteException;
 import com.formation.emergency.exception.code.Indisponibilite;
 
 
-@Service("logistique")
+//@Service("logistique")
+@Transactional
 public class Logistique implements ILogistique {
 
-	@Autowired
-	@Qualifier("equipementDao")	
+//  Utiliser le @Autowired quand on est à l'interieur d'une couche (indoor) / utliser le xml quand on est outdoor	
+//	@Autowired
+//	@Qualifier("equipementDao")	
 	private IDao<Equipement> dao;
 	
 	@Override
-	public void acheter(Equipement item) throws IndisponibiliteException {
+	public void acheter(Equipement item) throws Exception {
 		dao.create(item);		
 	}
 
 	@Override
-	public void reparer(Equipement item) throws IndisponibiliteException {		
+	public void mettreAJoutEtat(Equipement item) throws Exception {
+		dao.update(item);		
+	}
+	
+	@Override
+	public void reparer(Equipement item) throws Exception {
 		item.setEtat(EtatEquipement.FONCTIONNE);
 		dao.update(item);
 	}
 
 	@Override
-	public void retirer(Equipement item) throws IndisponibiliteException {
-		dao.delete(item.getReference());		
+	public void retirer(Equipement item) throws Exception {
+		dao.delete(item.getId());		
 	}
 
 	@Override
-	public Equipement mettreADisposition(String reference) throws IndisponibiliteException {
-		Equipement item = dao.find(reference);
+	public Equipement mettreADisposition(Integer id) throws Exception {
+		Equipement item = dao.find(id);
 		if (item.isReserve()) {
 			throw new IndisponibiliteException(Indisponibilite.RESERVE,"Cet equipement est déjà reservé");
 		} else if (item.getEtat() == EtatEquipement.CASSE) {
 			throw new IndisponibiliteException(Indisponibilite.IRREPARABLE,"Cet equipement est cassé");
 		}
 		item.setReserve(true);
+		dao.update(item);
 		return item;
 	}
 
 	@Override
-	public void recuperer(Equipement item) throws IndisponibiliteException {
+	public void recuperer(Equipement item) throws Exception {
 		item.setReserve(false);
 		dao.update(item);
 	}
@@ -60,5 +66,5 @@ public class Logistique implements ILogistique {
 	public void setDao(IDao<Equipement> dao) {
 		this.dao = dao;
 	}
-
+	
 }

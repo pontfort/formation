@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"	
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -7,10 +7,10 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil">
-		<property name="dao" ref="patientDao" />
-	</bean>
+	<bean id="patientDaoMem" class="com.formation.emergency.domain.dao.memory.PatientDaoMemory" />
+	<bean id="patientDaoJpa" class="com.formation.emergency.domain.dao.jpa.PatientDaoJPA" />
 	
-	<import resource="emergency-config-db.xml"/>
-	
+ 	<bean id="equipementDaoMem" class="com.formation.emergency.domain.dao.memory.EquipementDaoMemory" /> 	
+ 	<bean id="equipementDaoJpa" class="com.formation.emergency.domain.dao.jpa.EquipementDaoJPA" />
+
 </beans>                                    

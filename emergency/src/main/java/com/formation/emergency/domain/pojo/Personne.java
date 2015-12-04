@@ -1,6 +1,7 @@
 package com.formation.emergency.domain.pojo;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
 import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
@@ -23,16 +28,39 @@ import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TypePersonne", discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue(value="PERSONNE")
+@NamedEntityGraphs({
+    @NamedEntityGraph(
+        name = "brancheMere",
+        attributeNodes = {
+            @NamedAttributeNode(value = "mere")
+        }
+    ),
+    @NamedEntityGraph(
+        name = "brancheChildren",
+        attributeNodes = {
+            @NamedAttributeNode(value = "enfants", subgraph = "sousGrapheFeuilleSortie")
+        },
+        subgraphs = {
+            @NamedSubgraph(
+                    name = "sousGrapheFeuilleSortie",
+                    attributeNodes = {
+                        @NamedAttributeNode(value = "feuilles")
+                    }
+            )
+        }
+    )
+})
 public class Personne {
 		
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	private String uuid;
 		
@@ -42,15 +70,15 @@ public class Personne {
 	
 	private String prenom;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn
 	private Personne mere;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn
 	private Personne pere;
 	
-	@OneToMany(mappedBy="mere", cascade={CascadeType.PERSIST, CascadeType.REMOVE})	
+	@OneToMany(mappedBy="mere", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} , orphanRemoval=true)
 	private Set<Personne> enfants;
 	  
 //  (Cas 1)	-> La FK vers la personne est dans feuille de sortie
@@ -59,7 +87,19 @@ public class Personne {
 	@OneToMany(cascade=CascadeType.ALL)
 	private Set<FeuilleSortie> feuilles;
 	
-	public int getId() {
+	public Personne() {
+		this.enfants = new HashSet<Personne>();
+	}
+	
+		
+	public Personne(String nom, String prenom) {
+		this();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 

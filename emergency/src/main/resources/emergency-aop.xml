@@ -13,36 +13,24 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
 		
-	
+
 	<context:component-scan base-package="com.formation.emergency" />
-	
-	<!--  Transaction -->
-	
-	<tx:annotation-driven transaction-manager="txManager" />
-	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
-	
+
+	<bean id="myEventHandler" class="com.formation.emergency.aop.EventHandler" />
+
 	<aop:config>
-		<aop:pointcut id="dao" expression="execution(* com.formation.emergency.domain.dao.jpa.*.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="dao" />
-	</aop:config>	
-		
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <!-- the transactional semantics... -->
-        <tx:attributes>
-            <!-- all methods starting with 'get' are read-only -->
-            <tx:method name="get*" read-only="true"/>
-            <!-- other methods use the default transaction settings (see below) -->
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-    	
+		<aop:aspect id="myEventHandlerAspect" ref="myEventHandler">
+			<aop:pointcut id="methodeLogistique"
+				expression="execution(* com.formation.emergency.business.IAccueil.*(..))" />
+			<aop:around pointcut-ref="methodeLogistique" method="myFunction" />
+
+			<aop:pointcut id="methodeDAO" expression="execution(* *..dao.*.*(..))" />
+			<aop:around pointcut-ref="methodeDAO" method="logDao" />
+
+			<aop:pointcut id="methodeSetProperty" expression="execution(* *..Equipement.set*(..))" />
+			<aop:around pointcut-ref="methodeSetProperty" method="logSetProperty" />
+
+		</aop:aspect>
+	</aop:config>
 	
-	<import resource="emergency-service.xml"/>
-	
-	<import resource="emergency-dao.xml"/>
-	
-	<import resource="emergency-config-db.xml"/>
-	
-	<import resource="emergency-aop.xml"/>		
-		
 </beans>                                    
