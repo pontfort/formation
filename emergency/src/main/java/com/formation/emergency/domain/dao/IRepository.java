@@ -1,12 +1,16 @@
 package com.formation.emergency.domain.dao;
 
+import java.util.List;
+
 public interface IRepository<T> {
 
-	void create(T object);
+	void create(Object object) throws Exception;
 	
-	T read(Object key);
+	T read(Object key) throws Exception;
 	
-	void update(T object);
+	void update(T object) throws Exception;
 	
-	void delete(Object key);
+	void delete(Object key) throws Exception;
+	
+	List<T> findAll() throws Exception;
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -21,7 +22,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="discriminator_personne", discriminatorType=DiscriminatorType.STRING)
 public class Personne {
 		
 	@Id
@@ -45,7 +46,7 @@ public class Personne {
 	@ManyToOne
 	private Personne pere;
 
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="mere_enfant")
 	private List<Personne> enfants = new ArrayList<Personne>();
 	

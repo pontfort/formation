@@ -1,17 +1,18 @@
 package com.formation.emergency.domain.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.formation.emergency.domain.pojo.Patient;
 
-public class PatientDaoMemory implements IRepository<Patient> {
+public class PatientDaoMemory extends GenericRepository implements IRepository<Patient> {
 
 	Map<String, Patient> patients = new HashMap<String, Patient>();
 	
 	@Override
-	public void create(Patient patient) {
-		patients.put(patient.getNumeroSecu(), patient);
+	public void create(Object patient) {
+		patients.put(((Patient)patient).getNumeroSecu(), (Patient) patient);
 	}
 
 	@Override
@@ -30,5 +31,11 @@ public class PatientDaoMemory implements IRepository<Patient> {
 		{
 			patients.remove(key);
 		}
+	}
+
+	@Override
+	public List<Patient> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

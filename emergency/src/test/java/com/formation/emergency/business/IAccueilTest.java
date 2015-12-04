@@ -28,38 +28,43 @@ public class IAccueilTest extends TestCase {
 		context = null;
 	}
 
-	public void testReceptionner() throws RechercheException {
-		
+	public void testReceptionner() throws Exception {
+		try {
 			Patient patient = new Patient();
 			patient.setNumeroSecu("123456789");
 			patient.setNom("Abadie");
-			patient.setNom("Eric");
+			patient.setPrenom("Eric");
 			patient.setEtatPatient(EtatPatient.CONSULTATION);
-				
-			Personne enfant1 = new Personne();
-			Personne enfant2 = new Personne();
-			
+
+			Patient enfant1 = new Patient();
+			Patient enfant2 = new Patient();
+
 			enfant1.setMere(patient);
 			enfant2.setMere(patient);
-					
+			enfant1.setNumeroSecu("13245");
+			enfant2.setNumeroSecu("54321");
+
 			patient.getEnfants().add(enfant1);
 			patient.getEnfants().add(enfant2);
-			
+
 			accueil.receptionner(patient);
+		} catch (RechercheException ex) {			
+			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
+		}
 	}
 
-//	public void testsortie() {
-//		try {
-//			Patient patient = new Patient();
-//			patient.setNumeroSecu("123456789");
-//			patient.setEtatPatient(EtatPatient.SORTIE_DEFINITIVE);
-//			patient.setNom("testUpdate");
-//			patient.setMere(patient);
-//			patient.setId(1);
-//			FeuilleSortie feuilleSortie = accueil.sortie(patient);
-//			
-//		} catch (Exception ex) {
-//			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
-//		}
-//	}
+	// public void testsortie() {
+	// try {
+	// Patient patient = new Patient();
+	// patient.setNumeroSecu("123456789");
+	// patient.setEtatPatient(EtatPatient.SORTIE_DEFINITIVE);
+	// patient.setNom("testUpdate");
+	// patient.setMere(patient);
+	// patient.setId(1);
+	// FeuilleSortie feuilleSortie = accueil.sortie(patient);
+	//
+	// } catch (Exception ex) {
+	// fail("IAccueilTest.testsortie()" + ex.getMessage());
+	// }
+	// }
 }

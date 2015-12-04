@@ -1,6 +1,8 @@
 package com.formation.emergency.domain.dao;
 
-public class Dao implements IRepository {
+import java.util.List;
+
+public class Dao extends GenericRepository implements IRepository {
 
 	@Override
 	public void create(Object object) {
@@ -24,6 +26,12 @@ public class Dao implements IRepository {
 	public void delete(Object key) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<?> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

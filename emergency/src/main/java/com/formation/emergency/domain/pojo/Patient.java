@@ -27,7 +27,9 @@ import javax.persistence.Table;
 })
 @DiscriminatorValue("PATIENT")
 @NamedQueries({
-	@NamedQuery(name="updateEtat", query="Update Patient p SET p.etat = :pEtat where p.id = :pId")
+	@NamedQuery(name="patient.updateEtat", query="Update Patient p SET p.etatPatient = :pEtat where p.numeroSecu = :pNumeroSecu"),
+	@NamedQuery(name="patient.delete", query="Delete from Patient p where p.numeroSecu = :pNumeroSecu"),
+	@NamedQuery(name="patient.select.numeroSecu", query="SELECT p from Patient p where p.numeroSecu = :pNumeroSecu")
 })
 public class Patient extends Personne {
 

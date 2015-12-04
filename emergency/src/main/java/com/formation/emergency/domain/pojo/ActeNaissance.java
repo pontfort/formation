@@ -1,6 +1,10 @@
 package com.formation.emergency.domain.pojo;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-public class ActeNaissance extends FeuilleSortie {
+@Entity
+@DiscriminatorValue("ACTENAISSANCE")
+public class ActeNaissance extends Acte {
 
 }
