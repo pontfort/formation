@@ -18,5 +18,10 @@
 	<bean id="logistique" class="com.formation.emergency.business.impl.LogistiqueWithExecuteQuery">
 		<property name="dao" ref="equipementDaoJpa" />
 	</bean>
+		
+	<bean id="logistiqueFinder" class="com.formation.emergency.business.impl.LogisitiqueFinder">
+		<property name="dao" ref="equipementDaoJpa" />
+	</bean>
+	
 
 </beans>     
