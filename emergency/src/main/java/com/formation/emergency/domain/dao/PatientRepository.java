@@ -1,8 +1,10 @@
 package com.formation.emergency.domain.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.Patient;
 
 public class PatientRepository implements IRepository<Patient> {
@@ -10,9 +12,9 @@ public class PatientRepository implements IRepository<Patient> {
 	Map<String, Patient> listePatient = new HashMap<String, Patient>();
 
 	@Override
-	public void create(Patient object) {
+	public void create(Object object) {
 		// TODO Auto-generated method stub
-		listePatient.put(object.getNumeroSecu(), object);
+		listePatient.put(((Patient)object).getNumeroSecu(), (Patient)object);
 	}
 
 	@Override
@@ -33,5 +35,10 @@ public class PatientRepository implements IRepository<Patient> {
 		listePatient.remove(key);
 	}
 
+	@Override
+	public List<Patient> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

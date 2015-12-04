@@ -2,10 +2,8 @@ package com.formation.emergency.business;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.formation.emergency.business.impl.Accueil;
 import com.formation.emergency.domain.pojo.EtatPatient;
-import com.formation.emergency.domain.pojo.FeuilleSortie;
 import com.formation.emergency.domain.pojo.Patient;
 import com.formation.emergency.domain.pojo.Personne;
 import com.formation.emergency.exception.RechercheException;
@@ -19,7 +17,7 @@ public class IAccueilTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		ApplicationContext app = new ClassPathXmlApplicationContext("azam.xml");
-		accueil = (Accueil) app.getBean("accueil");
+		accueil = (IAccueil) app.getBean("accueil");
     	
 	}
 
@@ -29,22 +27,24 @@ public class IAccueilTest extends TestCase {
 	}
 
 	public void testReceptionner() throws RechercheException {
-
-			Patient patient = new Patient();
-			patient.setNumeroSecu("AZAERTT");
-			accueil.receptionner(patient);
-
-
+		Patient patient = new Patient("FAMILLE", "parent");
+		patient.setNumeroSecu("AZAERTT");
+		Personne enfant = new Personne("FAMILLE", "enfant");
+		patient.getEnfants().add(enfant);
+		enfant.setMere(patient);
+		//Personne gp = new Personne("FAMILLE", "grand pere");
+		//patient.setPere(gp);
+		//Personne gm = new Personne("FAMILLE", "grand mere");
+		//patient.setMere(gm);
+		accueil.receptionner(patient);
 	}
 
 	public void testsortie() {
 		try {
-			Patient patient = new Patient();
-			patient.setEtat(EtatPatient.DOIT_CONSULTER);
+			Patient patient = new Patient("FAMILLE", "parent");
+			patient.setEtat(EtatPatient.MORT);
 			patient.setNumeroSecu("AZAERTT");
-			FeuilleSortie feuilleSortie = accueil.sortie(patient);
-			
-			
+			accueil.sortie(patient);
 		} catch (Exception ex) {
 			fail("IAccueilTest.testReceptionner()" + ex.getMessage());
 		}

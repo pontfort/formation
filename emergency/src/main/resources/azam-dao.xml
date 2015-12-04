@@ -8,5 +8,13 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
-	<bean id="daoPatient" class="com.formation.emergency.domain.dao.PatientRepository"/>
+	
+	<bean id="patientRepository" class="com.formation.emergency.domain.dao.PatientRepository"/>
+	
+	<bean id="patientJpa" class="com.formation.emergency.domain.dao.PatientJpa"/>
+	
+	<bean id="equipementJpa" class="com.formation.emergency.domain.dao.EquipementJpa"/>
+	
+	<bean id="equipementSelector" class="com.formation.emergency.domain.dao.EquipementSelector"/>
+	
 </beans>

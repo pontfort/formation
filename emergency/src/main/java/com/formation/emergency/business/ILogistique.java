@@ -7,12 +7,12 @@ public interface ILogistique {
 
 	public void acheter(Equipement equipement) throws IndisponibiliteException;
 
-	public void reparer(Equipement equipement) throws IndisponibiliteException;
+	public void reparer(Equipement equipement) throws IndisponibiliteException, Exception;
 
-	public void retirer(Equipement equipement) throws IndisponibiliteException;
+	public void retirer(Equipement equipement) throws IndisponibiliteException, Exception;
 
-	public Equipement mettreADisposition(String refEquipement) throws IndisponibiliteException;
+	public Equipement mettreADisposition(String refEquipement) throws IndisponibiliteException, Exception;
 
-	public void recuperer(Equipement equipement) throws IndisponibiliteException;
+	public void recuperer(Equipement equipement) throws IndisponibiliteException, Exception;
 
 }

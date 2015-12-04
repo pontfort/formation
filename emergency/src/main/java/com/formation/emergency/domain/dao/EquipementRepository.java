@@ -1,21 +1,19 @@
 package com.formation.emergency.domain.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 import org.springframework.stereotype.Repository;
-
 import com.formation.emergency.domain.pojo.Equipement;
-import com.formation.emergency.domain.pojo.Patient;
+
 @Repository("daoEquipement")
 public class EquipementRepository implements IRepository<Equipement> {
 
 	Map<String, Equipement> listeEquipement = new HashMap<String, Equipement>();
 	
-	@Override
-	public void create(Equipement object) {
+	public void create(Object object) {
 		// TODO Auto-generated method stub
-		listeEquipement.put(object.getReference(), object);
+		listeEquipement.put(((Equipement)object).getReference(), (Equipement)object);
 	}
 
 	@Override
@@ -34,6 +32,12 @@ public class EquipementRepository implements IRepository<Equipement> {
 	public void delete(Object key) {
 		// TODO Auto-generated method stub
 		listeEquipement.remove(key);
+	}
+
+	@Override
+	public List<Equipement> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

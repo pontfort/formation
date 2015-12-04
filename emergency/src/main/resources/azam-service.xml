@@ -8,7 +8,12 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
+	
 	<bean id="accueil" class="com.formation.emergency.business.impl.Accueil">
-		<property name="patientDao" ref="daoPatient"/>
+		<property name="patientDao" ref="patientJpa"/>
+	</bean>
+	
+	<bean id="logistique" class="com.formation.emergency.business.impl.Logistique">
+		<property name="equipementDao" ref="equipementJpa"/>
 	</bean>
 </beans>

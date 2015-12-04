@@ -1,13 +1,23 @@
 package com.formation.emergency.domain.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-@Entity
-public class Patient extends Personne {
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import com.formation.emergency.domain.dao.QueriesDictonary;
 
+@Entity
+@DiscriminatorValue(value = "PATIENT")
+@NamedQueries({
+	@NamedQuery(name = QueriesDictonary.PATIENT_UPDATE_ETAT, query = "UPDATE Patient p SET p.etat = :"+ QueriesDictonary.PATIENT_ETAT + " WHERE p.id = :" + QueriesDictonary.PATIENT_ID),
+	@NamedQuery(name = QueriesDictonary.PATIENT_DELETE, query = "DELETE Patient p WHERE p.id = :" + QueriesDictonary.PATIENT_ID)
+})
+public class Patient extends Personne {
+	
 	// TODO non obligatoire
 	@Embedded
 	private Adresse adresse;
@@ -16,6 +26,10 @@ public class Patient extends Personne {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "state")
 	private EtatPatient etat;
+
+	public Patient(String nom, String prenom) {
+		super(nom, prenom);
+	}
 
 	public String getNumeroSecu() {
 		return numeroSecu;

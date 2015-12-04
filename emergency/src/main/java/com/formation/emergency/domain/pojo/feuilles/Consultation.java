@@ -1,9 +1,11 @@
-package com.formation.emergency.domain.pojo;
+package com.formation.emergency.domain.pojo.feuilles;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue(value = "CONSULTATION")
 public class Consultation extends FeuilleSortie {
 
 	@Column(name = "md")

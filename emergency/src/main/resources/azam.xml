@@ -4,15 +4,43 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context 
-                           http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:component-scan base-package="com.formation.emergency"/>
-	<bean id="personne" class="com.formation.emergency.domain.pojo.Personne">
-		<property name="nom" value="fred"/>
-		<property name="prenom" value="chopin"/>
-	</bean>
+    
+    <bean id="myEventHandler" class="com.formation.emergency.aop.eventHandler"/>
+	<aop:config>
+		<aop:aspect id="aopEventHandler" ref="myEventHandler">
+			<aop:pointcut id="methodeService" expression="execution(* com.formation.emergency.business.impl.Accueil.*(..))" />
+			<aop:around pointcut-ref="methodeService" method="around" />
+		</aop:aspect>
+	</aop:config>
+	
+	<tx:annotation-driven transaction-manager="txManager" />
+	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <!-- the transactional semantics... -->
+        <tx:attributes>
+            <!-- all methods starting with 'get' are read-only -->
+            <tx:method name="get*" read-only="true"/>
+            <!-- other methods use the default transaction settings (see below) -->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <aop:config>
+	    <aop:pointcut id="dao" expression="execution(* com.formation.emergency.domain.dao.*Jpa.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="dao"/>
+	</aop:config>
+	
 	<import resource="azam-confDB.xml"/>
 	<import resource="azam-dao.xml"/>
 	<import resource="azam-service.xml"/>
