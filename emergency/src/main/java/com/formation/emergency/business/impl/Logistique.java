@@ -26,36 +26,60 @@ public class Logistique implements ILogistique {
 		if (equipement == null)
 			throw new IndisponibiliteException(Indisponibilite.VOLE, "L'equipement n'existe pas !");
 
-		if (equipement.getId() != null) {
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(IQueryConstante.PARAM_ETAT, equipement.getEtat());
-			params.put(IQueryConstante.PARAM_TYPE, equipement.getType());
-			params.put(IQueryConstante.PARAM_ID, equipement.getId());
-			((IRepositoryGenric) logistiqueDao).executeQuery(IQueryConstante.EQUIPEMENT_UPDATE, params);
-		} else
-			logistiqueDao.create(equipement);
+		try {
+			if (equipement.getId() != null) {
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put(IQueryConstante.PARAM_ETAT, equipement.getEtat());
+				params.put(IQueryConstante.PARAM_TYPE, equipement.getType());
+				params.put(IQueryConstante.PARAM_ID, equipement.getId());
+				((IRepositoryGenric) logistiqueDao).executeQuery(IQueryConstante.EQUIPEMENT_UPDATE, params);
+			} else
+				logistiqueDao.create(equipement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void reparer(Equipement equipement) throws IndisponibiliteException {
 		if (equipement.getEtat() != EtatEquipement.CASSE)
 			throw new IndisponibiliteException(Indisponibilite.IRREPARABLE, "Irreparable");
-		logistiqueDao.update(equipement);
+		try {
+			logistiqueDao.update(equipement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void retirer(Equipement equipement) throws IndisponibiliteException {
-		logistiqueDao.delete(equipement.getId());
+		try {
+			logistiqueDao.delete(equipement.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Equipement mettreADisposition(Object refEquipement) throws IndisponibiliteException {
-		return logistiqueDao.find(refEquipement);
+		try {
+			return logistiqueDao.find(refEquipement);
+		} catch (Exception e) {
+			throw new IndisponibiliteException();
+		}
 	}
 
 	@Override
 	public void recuperer(Equipement equipement) throws IndisponibiliteException {
-		logistiqueDao.update(equipement);
+		try {
+			logistiqueDao.update(equipement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public IRepository<Equipement> getLogistiqueDao() {
@@ -68,7 +92,14 @@ public class Logistique implements ILogistique {
 
 	@Override
 	public List<Equipement> findByStemming(Date min, Date max, EtatEquipement etat, String pays, String chaine) {
-		return logistiqueDao.findByStemming(min, max, etat, pays, chaine);
+		List<Equipement> findByStemming = null;
+		try {
+			findByStemming = logistiqueDao.findByStemming(min, max, etat, pays, chaine);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return findByStemming;
 	}
 
 }

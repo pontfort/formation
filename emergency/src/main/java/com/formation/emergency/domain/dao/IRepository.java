@@ -8,16 +8,17 @@ import com.formation.emergency.domain.pojo.equipement.Equipement;
 
 public interface IRepository<T> {
 
-	public void create(Object object);
+	public void create(Object object) throws Exception;
 
-	public void update(T object);
+	public void update(T object) throws Exception;
 
-	public void delete(Object object);
+	public void delete(Object object) throws Exception;
 
-	public T find(Object key);
+	public T find(Object key) throws Exception;
 
-	public List<T> findall();
+	public List<T> findall() throws Exception;
 
-	public List<Equipement> findByStemming(Date min, Date max, EtatEquipement etat, String pays, String chaine);
+	public List<Equipement> findByStemming(Date min, Date max, EtatEquipement etat, String pays, String chaine)
+			throws Exception;
 
 }
