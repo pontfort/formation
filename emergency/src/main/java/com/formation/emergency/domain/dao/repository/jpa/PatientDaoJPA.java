@@ -1,9 +1,9 @@
-package com.formation.emergency.domain.dao.jpa;
+package com.formation.emergency.domain.dao.repository.jpa;
 
 import javax.persistence.Query;
 
-import com.formation.emergency.domain.dao.IDao;
-import com.formation.emergency.domain.dao.QueriesDictionary;
+import com.formation.emergency.domain.dao.repository.IDao;
+import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 import com.formation.emergency.domain.pojo.Patient;
 import com.formation.emergency.domain.pojo.Personne;
 

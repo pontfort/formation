@@ -3,7 +3,7 @@ package com.formation.emergency.domain.dao.memory;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.formation.emergency.domain.dao.IDao;
+import com.formation.emergency.domain.dao.repository.IDao;
 import com.formation.emergency.domain.pojo.Equipement;
 
 public class EquipementDaoMemory  implements IDao<Equipement> {

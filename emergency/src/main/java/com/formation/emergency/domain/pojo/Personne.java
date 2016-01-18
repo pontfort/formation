@@ -22,6 +22,7 @@ import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
+import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 
 @Entity

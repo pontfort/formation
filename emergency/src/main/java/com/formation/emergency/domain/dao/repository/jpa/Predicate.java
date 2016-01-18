@@ -1,12 +1,12 @@
-package com.formation.emergency.domain.dao.jpa;
+package com.formation.emergency.domain.dao.repository.jpa;
 
 public class Predicate {
-	
+
 	private String fieldName;
 	private Object fieldValue;
 	private OperatorPredicate operator;
-	
-	public Predicate() {	
+
+	public Predicate() {
 	}
 
 	public Predicate(String fieldName, Object fieldValue, OperatorPredicate operator) {
@@ -39,7 +39,5 @@ public class Predicate {
 	public void setOperator(OperatorPredicate operator) {
 		this.operator = operator;
 	}
-	
-	
 
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"	
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context 
@@ -12,37 +12,36 @@
                            http://www.springframework.org/schema/aop/spring-aop.xsd
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
-		
-	
+
+
 	<context:component-scan base-package="com.formation.emergency" />
-	
-	<!--  Transaction -->
-	
-	<tx:annotation-driven transaction-manager="txManager" />
-	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
-	
+
+	<!-- Transaction -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
 	<aop:config>
-		<aop:pointcut id="dao" expression="execution(* com.formation.emergency.domain.dao.jpa.*.*(..))" />
+		<aop:pointcut id="dao"
+			expression="execution(* com.formation.emergency.domain.dao.jpa.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="dao" />
-	</aop:config>	
-		
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <!-- the transactional semantics... -->
-        <tx:attributes>
-            <!-- all methods starting with 'get' are read-only -->
-            <tx:method name="get*" read-only="true"/>
-            <!-- other methods use the default transaction settings (see below) -->
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-    	
-	
-	<import resource="emergency-service.xml"/>
-	
-	<import resource="emergency-dao.xml"/>
-	
-	<import resource="emergency-config-db.xml"/>
-	
-	<import resource="emergency-aop.xml"/>		
-		
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- all methods starting with 'get' are read-only -->
+			<tx:method name="get*" read-only="true" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<import resource="emergency-service.xml" />
+
+	<import resource="emergency-dao.xml" />
+
+	<import resource="emergency-config-db.xml" />
+
+	<import resource="emergency-aop.xml" />
+
 </beans>                                    

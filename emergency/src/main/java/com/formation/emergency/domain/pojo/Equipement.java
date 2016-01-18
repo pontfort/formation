@@ -12,76 +12,97 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.formation.emergency.domain.dao.QueriesDictionary;
+import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 
 @Entity
-@Table(name="machine")
+@Table(name = "machine")
 @NamedQueries({
-	@NamedQuery(name=QueriesDictionary.EQUIPEMENT_UPDATE,query="UPDATE Equipement e SET e.reference = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_REFERENCE + ",e.etat = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ETAT + ", e.nom = :" + QueriesDictionary.PATIENT_QUERY_PARAM_NOM + ", e.reserve = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_RESERVE + " WHERE e.id = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID),
-	@NamedQuery(name=QueriesDictionary.EQUIPEMENT_DELETE,query="DELETE Equipement e WHERE e.id = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID)
-})
+		@NamedQuery(name = QueriesDictionary.EQUIPEMENT_UPDATE, query = "UPDATE Equipement e SET e.reference = :"
+				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_REFERENCE + ",e.etat = :"
+				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ETAT + ", e.nom = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_NOM + ", e.reserve = :"
+				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_RESERVE + " WHERE e.id = :"
+				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID),
+		@NamedQuery(name = QueriesDictionary.EQUIPEMENT_DELETE, query = "DELETE Equipement e WHERE e.id = :"
+				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID) })
 public class Equipement {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String reference;
-	
+
 	private String nom;
-	
+
 	@Enumerated(EnumType.STRING)
 	private EtatEquipement etat = EtatEquipement.FONCTIONNE;
-	
+
 	private boolean reserve = false;
-	
+
 	private Date dateAchat;
-	
+
 	private String PaysOrigine;
-	
+
+	private int price;
+
 	public Equipement() {
 	}
-	
+
 	public Equipement(String reference, String nom) {
 		this();
 		this.reference = reference;
 		this.nom = nom;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getReference() {
 		return this.reference;
 	}
+
 	public void setReference(String reference) {
 		this.reference = reference;
-	}	
-	
+	}
+
 	public boolean isReserve() {
 		return reserve;
 	}
+
 	public void setReserve(boolean reserve) {
 		this.reserve = reserve;
 	}
+
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public EtatEquipement getEtat() {
 		return etat;
 	}
+
 	public void setEtat(EtatEquipement etat) {
 		this.etat = etat;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Equipement [" + (reference != null ? "reference=" + reference + ", " : "")
@@ -102,5 +123,5 @@ public class Equipement {
 
 	public void setPaysOrigine(String paysOrigine) {
 		PaysOrigine = paysOrigine;
-	}	
+	}
 }

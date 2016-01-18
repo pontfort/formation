@@ -15,8 +15,8 @@ public class IAccueilTest extends TestCase {
 	ApplicationContext context = null;
 	IAccueil accueil = null;
 
-	private Patient p1;
-	private Patient p2;
+	private Patient mere;
+	private Patient pere;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -30,16 +30,15 @@ public class IAccueilTest extends TestCase {
 
 	public void testAccueil() {
 
-		p1 = new Patient("Patient1", "p1");
-		p1.setNumeroSECU("125454545");
-		p1.setEtat(EtatPatient.ORDONNANCE);
+		mere = new Patient("Patient1", "mere1");
+		mere.setNumeroSECU("125454545");
+		mere.setEtat(EtatPatient.ORDONNANCE);
 
-		p2 = new Patient("Patient2", "p2");
-		p1.setNumeroSECU("99797");
-		p1.setEtat(EtatPatient.MORT);
+		pere = new Patient("Patient2", "pere2");
+		pere.setNumeroSECU("99797");
+		pere.setEtat(EtatPatient.CONSULTATION);
 
 		receptionner();
-//		sortie();
 	}
 
 	private void receptionner() {
@@ -48,32 +47,16 @@ public class IAccueilTest extends TestCase {
 			Personne enf1 = new Personne("PATOULATCHI", "Enfant1");
 			Personne enf2 = new Personne("PATOULATCHI", "Enfant2");
 
-			Patient mere = new Patient("PATOULATCHI", "Maman");
 			mere.getEnfants().add(enf1);
 			mere.getEnfants().add(enf2);
 			enf1.setMere(mere);
 			enf2.setMere(mere);
 
-			Personne pere_Chopin = new Personne("Chopin", "papa");
-			Patient mere_Chopin = new Patient("Chopin", "maman");
-			mere_Chopin.setNumeroSECU("125454545");
-
-			Personne enf_Chopin = new Personne("Chopin", "Fréderic");
-			enf_Chopin.setMere(mere_Chopin);
-			enf_Chopin.setPere(pere_Chopin);
-
-			accueil.receptionner(p1);
-			accueil.receptionner(p2);
-
 			accueil.receptionner(mere);
-			
-			mere.setNom("Nom modifié");
-			mere.setPrenom("Prenom modifié");			
+			accueil.receptionner(pere);
+
 			mere.setEtat(EtatPatient.MORT);
-			mere.setNumeroSECU("99999999");
 			accueil.enregistrer(mere);
-			
-//			accueil.sortie(mere);
 
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -83,9 +66,9 @@ public class IAccueilTest extends TestCase {
 
 	private void sortie() {
 		try {
-			
-			FeuilleSortie f1 = accueil.sortie(p1);
-			FeuilleSortie f2 = accueil.sortie(p2);
+
+			FeuilleSortie f1 = accueil.sortie(mere);
+			FeuilleSortie f2 = accueil.sortie(pere);
 
 			System.out.println("f1 = " + f1);
 			System.out.println("f2 = " + f2);
