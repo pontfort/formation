@@ -1,15 +1,14 @@
 package com.formation.emergency.business;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.formation.emergency.domain.dao.jpa.EquipementDaoJPA;
 import com.formation.emergency.domain.pojo.Ambulance;
 import com.formation.emergency.domain.pojo.Equipement;
-import com.formation.emergency.domain.pojo.EtatEquipement;
 
 import junit.framework.TestCase;
 

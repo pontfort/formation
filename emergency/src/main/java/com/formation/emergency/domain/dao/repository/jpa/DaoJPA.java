@@ -1,4 +1,4 @@
-package com.formation.emergency.domain.dao.jpa;
+package com.formation.emergency.domain.dao.repository.jpa;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.formation.emergency.domain.dao.IGenericDao;
+import com.formation.emergency.domain.dao.repository.IGenericDao;
 
 public class DaoJPA implements IGenericDao {
 

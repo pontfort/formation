@@ -1,5 +1,8 @@
 package com.formation.emergency.business;
 
+import java.util.Date;
+import java.util.List;
+
 import com.formation.emergency.domain.pojo.Equipement;
 
 public interface ILogistique {
@@ -15,6 +18,8 @@ public interface ILogistique {
 	Equipement mettreADisposition(Integer id) throws Exception;
 	
 	void recuperer(Equipement item) throws Exception;
+	
+	List<Equipement> findWithQueryAutoBuild(String start, String contains, String end, Date startDate, Date endDate, float prixMin, float prixMax);
 	
 		
 }

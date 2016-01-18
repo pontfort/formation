@@ -1,12 +1,14 @@
 package com.formation.emergency.business.impl;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.formation.emergency.business.ILogistique;
-import com.formation.emergency.domain.dao.IDao;
-import com.formation.emergency.domain.dao.IGenericDao;
-import com.formation.emergency.domain.dao.QueriesDictionary;
+import com.formation.emergency.domain.dao.repository.IDao;
+import com.formation.emergency.domain.dao.repository.IGenericDao;
+import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.EtatEquipement;
 import com.formation.emergency.exception.IndisponibiliteException;
@@ -84,5 +86,12 @@ public class LogistiqueWithExecuteQuery implements ILogistique {
 	public void setDao(IDao<Equipement> dao) {
 		this.dao = dao;
 	}
+
+	@Override
+	public List<Equipement> findWithQueryAutoBuild(String start, String contains, String end, Date startDate,
+			Date endDate, float prixMin, float prixMax) {
+		//Not done
+		return null;
+	}	
 
 }

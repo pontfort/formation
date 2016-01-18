@@ -1,4 +1,4 @@
-package com.formation.emergency.domain.dao.jpa;
+package com.formation.emergency.domain.dao.repository.jpa;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +10,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 
-import com.formation.emergency.domain.dao.IDao;
-import com.formation.emergency.domain.dao.IDaoEquipement;
+import com.formation.emergency.domain.dao.repository.IDao;
+import com.formation.emergency.domain.dao.repository.IDaoEquipement;
 import com.formation.emergency.domain.pojo.Equipement;
 
 public class EquipementDaoJPA extends DaoJPA implements IDaoEquipement, IDao<Equipement> {

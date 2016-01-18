@@ -12,19 +12,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.formation.emergency.domain.dao.QueriesDictionary;
+import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 
 @Entity
 @Table(name="machine")
 @NamedQueries({
 	@NamedQuery(name=QueriesDictionary.EQUIPEMENT_UPDATE,query="UPDATE Equipement e SET e.reference = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_REFERENCE + ",e.etat = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ETAT + ", e.nom = :" + QueriesDictionary.PATIENT_QUERY_PARAM_NOM + ", e.reserve = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_RESERVE + " WHERE e.id = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID),
-	@NamedQuery(name=QueriesDictionary.EQUIPEMENT_DELETE,query="DELETE Equipement e WHERE e.id = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID)
+	@NamedQuery(name=QueriesDictionary.EQUIPEMENT_DELETE,query="DELETE Equipement e WHERE e.id = :" + QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID)	
 })
 public class Equipement {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	private String reference;
 	
@@ -39,6 +39,8 @@ public class Equipement {
 	
 	private String PaysOrigine;
 	
+	private float prix;
+	
 	public Equipement() {
 	}
 	
@@ -48,10 +50,10 @@ public class Equipement {
 		this.nom = nom;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -102,5 +104,13 @@ public class Equipement {
 
 	public void setPaysOrigine(String paysOrigine) {
 		PaysOrigine = paysOrigine;
+	}
+
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
 	}	
 }

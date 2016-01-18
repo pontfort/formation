@@ -1,9 +1,9 @@
-package com.formation.emergency.domain.dao;
+package com.formation.emergency.domain.dao.repository;
 
 import java.util.Date;
 import java.util.List;
 
-import com.formation.emergency.domain.dao.jpa.Predicate;
+import com.formation.emergency.domain.dao.repository.jpa.Predicate;
 import com.formation.emergency.domain.pojo.Equipement;
 
 public interface IDaoEquipement  {

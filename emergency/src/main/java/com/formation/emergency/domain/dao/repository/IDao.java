@@ -1,4 +1,4 @@
-package com.formation.emergency.domain.dao;
+package com.formation.emergency.domain.dao.repository;
 
 public interface IDao<T>  {
 		

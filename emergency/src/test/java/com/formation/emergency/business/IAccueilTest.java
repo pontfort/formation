@@ -35,18 +35,20 @@ public class IAccueilTest extends TestCase {
 		p1.setEtat(EtatPatient.ORDONNANCE);
 
 		p2 = new Patient("Patient2", "p2");
-		p1.setNumeroSECU("99797");
-		p1.setEtat(EtatPatient.MORT);
+		p2.setNumeroSECU("99797");
+		p2.setEtat(EtatPatient.MORT);
 
-		receptionner();
+		this.receptionner();
+		
+		
 //		sortie();
 	}
 
 	private void receptionner() {
 		try {
 
-			Personne enf1 = new Personne("PATOULATCHI", "Enfant1");
-			Personne enf2 = new Personne("PATOULATCHI", "Enfant2");
+			Personne enf1 = new Personne("PATOULATCHI-SPRINGDATA", "Enfant1");
+			Personne enf2 = new Personne("PATOULATCHI-SPRINGDATA", "Enfant2");
 
 			Patient mere = new Patient("PATOULATCHI", "Maman");
 			mere.getEnfants().add(enf1);
@@ -62,8 +64,8 @@ public class IAccueilTest extends TestCase {
 			enf_Chopin.setMere(mere_Chopin);
 			enf_Chopin.setPere(pere_Chopin);
 
-			accueil.receptionner(p1);
-			accueil.receptionner(p2);
+//			accueil.receptionner(p1);
+//			accueil.receptionner(p2);
 
 			accueil.receptionner(mere);
 			

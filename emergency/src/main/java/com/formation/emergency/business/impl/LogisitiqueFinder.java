@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.formation.emergency.business.ILogisitiqueFinder;
-import com.formation.emergency.domain.dao.IDaoEquipement;
-import com.formation.emergency.domain.dao.jpa.OperatorPredicate;
-import com.formation.emergency.domain.dao.jpa.Predicate;
+import com.formation.emergency.domain.dao.repository.IDaoEquipement;
+import com.formation.emergency.domain.dao.repository.jpa.OperatorPredicate;
+import com.formation.emergency.domain.dao.repository.jpa.Predicate;
 import com.formation.emergency.domain.pojo.Equipement;
 
 public class LogisitiqueFinder implements ILogisitiqueFinder{

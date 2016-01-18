@@ -1,4 +1,4 @@
-package com.formation.emergency.domain.dao.jpa;
+package com.formation.emergency.domain.dao.repository.jpa;
 
 public enum OperatorPredicate {
 	

@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.formation.emergency.domain.dao.QueriesDictionary;
+import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity

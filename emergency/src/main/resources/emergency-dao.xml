@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"	
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context 
-                           http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/data/jpa
+    					   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<bean id="patientDaoMem" class="com.formation.emergency.domain.dao.memory.PatientDaoMemory" />
-	<bean id="patientDaoJpa" class="com.formation.emergency.domain.dao.jpa.PatientDaoJPA" />
+ 	<!-- Memory -->
+	<bean id="patientDaoMem"
+		class="com.formation.emergency.domain.dao.memory.PatientDaoMemory" />
 	
- 	<bean id="equipementDaoMem" class="com.formation.emergency.domain.dao.memory.EquipementDaoMemory" /> 	
- 	<bean id="equipementDaoJpa" class="com.formation.emergency.domain.dao.jpa.EquipementDaoJPA" />
- 	 	
+	<bean id="equipementDaoMem"
+		class="com.formation.emergency.domain.dao.memory.EquipementDaoMemory" />
+			
+	<!-- DAO JPA -->
+	<bean id="patientDaoJpa" class="com.formation.emergency.domain.dao.repository.jpa.PatientDaoJPA" />
+	<bean id="equipementDaoJpa" class="com.formation.emergency.domain.dao.repository.jpa.EquipementDaoJPA" />
+	
+	<!-- Spring data - JPA -->
+	<jpa:repositories base-package="com.formation.emergency.domain.dao.springrepository" />
+	
 
 </beans>                                    
