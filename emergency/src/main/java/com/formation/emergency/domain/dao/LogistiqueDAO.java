@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import com.formation.emergency.domain.pojo.Equipement;
 
-@Repository("logistiqueDao")
+@Component("logistiqueDao")
 public class LogistiqueDAO implements IRepository<Equipement> {
 
 	private Map<Integer, Equipement> equipements = new HashMap<Integer, Equipement>();

@@ -1,9 +1,11 @@
 package com.formation.emergency.business.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.emergency.business.IAccueil;
 import com.formation.emergency.domain.dao.IRepository;
+import com.formation.emergency.domain.daoSpringRepo.IPatientJPA;
 import com.formation.emergency.domain.pojo.ActeDeces;
 import com.formation.emergency.domain.pojo.ActeNaissance;
 import com.formation.emergency.domain.pojo.Consultation;
@@ -19,12 +21,17 @@ import com.formation.emergency.exception.code.Recherche;
 public class Accueil implements IAccueil {
 
 	private IRepository<Patient> patientDao;
+	
+	@Autowired
+	private IPatientJPA patientRepo;
 
 	@Override
 	public boolean receptionner(Patient patient) throws RechercheException {
 		if (patient == null)
 			throw new RechercheException(Recherche.NULL, "Le petient n'existe pas !");
-		patientDao.create(patient);
+		//patientDao.create(patient);
+		patientRepo.saveAndFlush(patient);
+		patientRepo.updateNumSecu("652146854", patient.getId());
 		return true;
 	}
 
