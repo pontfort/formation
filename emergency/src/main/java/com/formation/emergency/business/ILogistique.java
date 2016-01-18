@@ -1,5 +1,8 @@
 package com.formation.emergency.business;
 
+import java.util.Date;
+import java.util.List;
+
 import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.exception.IndisponibiliteException;
 
@@ -14,4 +17,6 @@ public interface ILogistique {
 	public void recuperer(Equipement equipement) throws IndisponibiliteException;
 
 	Equipement mettreADisposition(Object refEquipement) throws IndisponibiliteException;
+	
+	List<Equipement> getbyCriteria(String sarting, String containing, String ending, Date dateachat,int prixmin, int prixmax);
 }

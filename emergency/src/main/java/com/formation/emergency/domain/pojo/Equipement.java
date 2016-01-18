@@ -19,26 +19,34 @@ import com.formation.emergency.domain.pojo.code.EtatEquipement;
 import com.formation.emergency.domain.pojo.code.TypeEquipement;
 
 @Entity
-@Table(name="machine")
-@NamedQueries({
-	@NamedQuery(name=QueriesDictionary.EQUIPEMENT_DELETE,query= "DELETE Equipement e WHERE e.id=:"+QueriesDictionary.EQUIPEMENT_QUERYPARAM_ID)
-})
+@Table(name = "machine")
+@NamedQueries({ @NamedQuery(name = QueriesDictionary.EQUIPEMENT_DELETE, query = "DELETE Equipement e WHERE e.id=:"
+		+ QueriesDictionary.EQUIPEMENT_QUERYPARAM_ID) })
 public class Equipement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	 Integer id;
+	Integer id;
 
 	@Enumerated(EnumType.STRING)
-	 TypeEquipement type;
+	TypeEquipement type;
 
 	@Enumerated(EnumType.STRING)
-	 EtatEquipement etat;
+	EtatEquipement etat;
 
-	 Date dateAchat;
-	 String paysOrigine;
-	 String reference;
-	
+	Date dateAchat;
+	String paysOrigine;
+	String reference;
+	Integer prix;
+
+	public Integer getPrix() {
+		return prix;
+	}
+
+	public void setPrix(Integer prix) {
+		this.prix = prix;
+	}
+
 	/**
 	 * @return the dateAchat
 	 */
@@ -47,7 +55,8 @@ public class Equipement {
 	}
 
 	/**
-	 * @param dateAchat the dateAchat to set
+	 * @param dateAchat
+	 *            the dateAchat to set
 	 */
 	public void setDateAchat(Date dateAchat) {
 		this.dateAchat = dateAchat;
@@ -61,7 +70,8 @@ public class Equipement {
 	}
 
 	/**
-	 * @param paysOrigine the paysOrigine to set
+	 * @param paysOrigine
+	 *            the paysOrigine to set
 	 */
 	public void setPaysOrigine(String paysOrigine) {
 		this.paysOrigine = paysOrigine;
@@ -75,7 +85,8 @@ public class Equipement {
 	}
 
 	/**
-	 * @param reference the reference to set
+	 * @param reference
+	 *            the reference to set
 	 */
 	public void setReference(String reference) {
 		this.reference = reference;
@@ -106,4 +117,3 @@ public class Equipement {
 	}
 
 }
-

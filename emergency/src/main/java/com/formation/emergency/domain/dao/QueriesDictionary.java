@@ -10,7 +10,7 @@ public interface QueriesDictionary {
 	
 	
 
-	public static final String EQUIPEMENT_DELETE = "Equipement.delete";	
+	public static final String EQUIPEMENT_DELETE = "Equipement.supprimer";	
 	public static final String EQUIPEMENT_QUERYPARAM_ID = "pid";
 	
 }
