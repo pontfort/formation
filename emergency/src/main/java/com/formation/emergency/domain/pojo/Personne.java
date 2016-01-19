@@ -26,28 +26,11 @@ import com.formation.emergency.domain.pojo.feuilles.FeuilleSortie;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator_personne")
 @DiscriminatorValue(value = "PERSONNE")
-@NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = "withMother",
-        attributeNodes = {
-            @NamedAttributeNode("mere")
-        }
-    ),
-    @NamedEntityGraph(
-        name = "withChildren",
-        attributeNodes = {
-            @NamedAttributeNode(value = "enfants", subgraph = "childrenFeuilleSortieGraph")
-        },
-        subgraphs = {
-            @NamedSubgraph(
-                    name = "childrenFeuilleSortieGraph",
-                    attributeNodes = {
-                        @NamedAttributeNode("feuillesSortie")
-                    }
-            )
-        }
-    )
-})
+@NamedEntityGraphs({ @NamedEntityGraph(name = "withMother", attributeNodes = { @NamedAttributeNode("mere") }),
+		@NamedEntityGraph(name = "withChildren", attributeNodes = {
+				@NamedAttributeNode(value = "enfants", subgraph = "childrenFeuilleSortieGraph") }, subgraphs = {
+						@NamedSubgraph(name = "childrenFeuilleSortieGraph", attributeNodes = {
+								@NamedAttributeNode("feuillesSortie") }) }) })
 public class Personne {
 
 	@Id
@@ -66,7 +49,7 @@ public class Personne {
 	@JoinColumn(name = "father")
 	@ManyToOne
 	private Personne pere;
-	@OneToMany(mappedBy = "mere", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(mappedBy = "mere", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Personne> enfants;
 	@OneToMany(mappedBy = "personne", cascade = CascadeType.ALL)
 	private List<FeuilleSortie> feuillesSortie;
@@ -74,6 +57,9 @@ public class Personne {
 	public Personne(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
+	}
+
+	public Personne() {
 	}
 
 	public int getId() {
@@ -125,7 +111,7 @@ public class Personne {
 	}
 
 	public List<Personne> getEnfants() {
-		if(enfants == null){
+		if (enfants == null) {
 			enfants = new ArrayList<Personne>();
 		}
 		return enfants;

@@ -8,7 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import com.formation.emergency.domain.dao.QueriesDictonary;
+
+import com.formation.emergency.domain.dao.repository.QueriesDictonary;
 
 @Entity
 @DiscriminatorValue(value = "PATIENT")
@@ -29,6 +30,9 @@ public class Patient extends Personne {
 
 	public Patient(String nom, String prenom) {
 		super(nom, prenom);
+	}
+
+	public Patient() {
 	}
 
 	public String getNumeroSecu() {

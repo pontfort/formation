@@ -40,9 +40,9 @@ public class AppTest
     {
     	ApplicationContext app = new ClassPathXmlApplicationContext("azam.xml");
     	
-    	Personne p = (Personne) app.getBean("personne");
+    	//Personne p = (Personne) app.getBean("personne");
     	
-    	System.out.println(p.getNom()+ " " + p.getPrenom());
+    	//System.out.println(p.getNom()+ " " + p.getPrenom());
     	
         assertTrue( true );
     }

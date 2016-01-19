@@ -1,9 +1,12 @@
 package com.formation.emergency.business.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.emergency.business.IAccueil;
-import com.formation.emergency.domain.dao.IRepository;
+import com.formation.emergency.domain.dao.repository.IRepository;
+import com.formation.emergency.domain.dao.springrepo.IPatientJPA;
+import com.formation.emergency.domain.pojo.EtatPatient;
 import com.formation.emergency.domain.pojo.Patient;
 import com.formation.emergency.domain.pojo.feuilles.ActeDeces;
 import com.formation.emergency.domain.pojo.feuilles.Consultation;
@@ -15,10 +18,13 @@ import com.formation.emergency.exception.RechercheException;
 public class Accueil implements IAccueil {
 
 	private IRepository<Patient> patientDao;
+	@Autowired private IPatientJPA patientRepo;
 
 	@Override
 	public boolean receptionner(Patient patient) throws RechercheException {
-		patientDao.create(patient);
+		// patientDao.create(patient);
+		patientRepo.saveAndFlush(patient);
+		patientRepo.updateEtat(EtatPatient.DOIT_CONSULTER, patient.getId());
 		return true;
 	}
 

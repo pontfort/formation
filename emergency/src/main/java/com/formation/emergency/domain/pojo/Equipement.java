@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.formation.emergency.domain.dao.QueriesDictonary;
+import com.formation.emergency.domain.dao.repository.QueriesDictonary;
 
 @Entity
 @DiscriminatorValue(value = "EQUIPEMENT")
@@ -29,8 +31,10 @@ public class Equipement {
 	private String reference;
 	@Column(name = "available")
 	private boolean disponible;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAchat;
 	private String paysOrigine;
+	private int prix;
 
 	public String getReference() {
 		return reference;
@@ -70,5 +74,13 @@ public class Equipement {
 
 	public void setPaysOrigine(String paysOrigine) {
 		this.paysOrigine = paysOrigine;
+	}
+
+	public int getPrix() {
+		return prix;
+	}
+
+	public void setPrix(int prix) {
+		this.prix = prix;
 	}
 }

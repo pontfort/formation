@@ -1,12 +1,13 @@
-package com.formation.emergency.domain.dao;
+package com.formation.emergency.domain.dao.repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import com.formation.emergency.domain.pojo.Equipement;
-
-@Repository("daoEquipement")
+@Component("daoEquipement")
 public class EquipementRepository implements IRepository<Equipement> {
 
 	Map<String, Equipement> listeEquipement = new HashMap<String, Equipement>();

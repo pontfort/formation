@@ -9,8 +9,8 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="myEmf"></property>
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	<!-- DB connection -->
 	<bean id="dataSource"
@@ -20,7 +20,8 @@
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
-	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 	    <property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.formation.emergency.domain.pojo" />
 		<property name="jpaVendorAdapter">

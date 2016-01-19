@@ -3,6 +3,7 @@ package com.formation.emergency.business;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.formation.emergency.business.impl.Logistique;
-import com.formation.emergency.domain.dao.EquipementSelector;
-import com.formation.emergency.domain.dao.IEquipementSelector;
+import com.formation.emergency.domain.dao.repository.EquipementSelector;
+import com.formation.emergency.domain.dao.repository.IEquipementSelector;
 import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.domain.pojo.PredicateOperator;
 import com.formation.emergency.domain.pojo.SelectorPredicate;
@@ -69,7 +70,7 @@ public class ILogistiqueTest extends TestCase {
 	
 	public void testRecuperer() throws Exception{
 		Equipement equipement = new Equipement();
-		equipement.setReference("AZERTY");
+		equipement.setReference("3456");
 		equipement.setDisponible(false);
 		logistique.acheter(equipement);
 		logistique.recuperer(equipement);
@@ -77,10 +78,31 @@ public class ILogistiqueTest extends TestCase {
 	
 	public void testRetirer() throws Exception{
 		Equipement equipement = new Equipement();
-		equipement.setReference("AZERTY");
+		equipement.setReference("1234");
 		equipement.setDisponible(true);
 		logistique.acheter(equipement);
 		logistique.retirer(equipement);
+	}
+	
+	
+	public void testRechercher() throws Exception{
+		Calendar d= Calendar.getInstance();
+		Calendar dd= Calendar.getInstance();
+		d.add(Calendar.DAY_OF_YEAR, -20);
+		dd.add(Calendar.DAY_OF_YEAR, -10);
+		
+		int countAvant = logistique.rechercheCustom("a", "c", "f", d.getTime(), Calendar.getInstance().getTime(), 10, 20).size();
+		Equipement equipement = new Equipement();
+		equipement.setReference("abcdef");
+		equipement.setDisponible(true);
+		equipement.setPrix(15);
+		
+		
+		equipement.setDateAchat(dd.getTime());
+		logistique.acheter(equipement); 
+		List<Equipement> liste = logistique.rechercheCustom("a", "c", "f", d.getTime(), Calendar.getInstance().getTime(), 10, 20);
+		System.out.println(liste.size());
+		assertEquals(countAvant+1, liste.size());
 	}
 
 }
