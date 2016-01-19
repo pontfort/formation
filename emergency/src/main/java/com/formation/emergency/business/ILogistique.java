@@ -19,6 +19,8 @@ public interface ILogistique {
 	
 	void recuperer(Equipement item) throws Exception;
 	
+	List<Equipement> findAll();
+	
 	List<Equipement> findWithQueryAutoBuild(String start, String contains, String end, Date startDate, Date endDate, float prixMin, float prixMax);
 	
 		

@@ -73,6 +73,11 @@ public class Logistique implements ILogistique {
 
 	public void setEquipementRepo(IEquipementSpringJPA equipementRepo) {
 		this.equipementRepo = equipementRepo;
+	}
+
+	@Override
+	public List<Equipement> findAll() {
+		return this.equipementRepo.findAll();
 	}	
 		
 	

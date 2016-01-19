@@ -92,6 +92,12 @@ public class LogistiqueWithExecuteQuery implements ILogistique {
 			Date endDate, float prixMin, float prixMax) {
 		//Not done
 		return null;
+	}
+
+	@Override
+	public List<Equipement> findAll() {
+		//Not done
+		return null;
 	}	
 
 }
