@@ -51,7 +51,7 @@ public class GestionEquipement extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+						
 		String ref = request.getParameter("reference");
 		
 		if (ref != null) {
@@ -76,9 +76,17 @@ public class GestionEquipement extends HttpServlet {
 					
 		List<Equipement> result = this.logistique.findAll();			
 		request.setAttribute("equipements", result);						
-		request.getRequestDispatcher("/gestionequipements.jsp").forward(request, response);		
+		request.getRequestDispatcher("/gestionequipements3.jsp").forward(request, response);		
 		
 																	
+	}
+	
+	private void DeleteEquip(Integer id) {		
+		try {
+			this.logistique.retirer(id);
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
 	}
 
 	/**

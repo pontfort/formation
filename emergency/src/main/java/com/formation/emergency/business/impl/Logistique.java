@@ -78,6 +78,12 @@ public class Logistique implements ILogistique {
 	@Override
 	public List<Equipement> findAll() {
 		return this.equipementRepo.findAll();
+	}
+
+	@Override
+	public void retirer(Integer id) throws Exception {
+		this.equipementRepo.delete(id);
+		
 	}	
 		
 	

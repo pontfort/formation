@@ -15,6 +15,8 @@ public interface ILogistique {
 	
 	void retirer(Equipement item) throws Exception;
 	
+	void retirer(Integer id) throws Exception;
+	
 	Equipement mettreADisposition(Integer id) throws Exception;
 	
 	void recuperer(Equipement item) throws Exception;

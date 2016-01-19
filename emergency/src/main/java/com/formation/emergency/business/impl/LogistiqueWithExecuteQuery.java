@@ -98,6 +98,11 @@ public class LogistiqueWithExecuteQuery implements ILogistique {
 	public List<Equipement> findAll() {
 		//Not done
 		return null;
+	}
+
+	@Override
+	public void retirer(Integer id) throws Exception {
+		//Not done				
 	}	
 
 }

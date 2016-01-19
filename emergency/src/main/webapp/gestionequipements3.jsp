@@ -1,4 +1,5 @@
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.formation.emergency.domain.pojo.Equipement"%>
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -9,40 +10,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Gestion des équipements</title>
 </head>
-<body>
+<body>	
 
-	<%
-		List<Equipement> result = ((List<Equipement>) request.getAttribute("equipements"));
+	Session ID : <c:out value="${pageContext.session.id}"></c:out>
 
-		if (result != null && result.size() != 0) {
-	%>
-
-	<h1>Liste des equipements</h1>
-
-	<table>
-		<tr>
-			<td>Reference</td>
-			<td>Nom</td>
-			<td>Date d'achat</td>
-		</tr>
-		
-		<%
-			for (Equipement item : result) {
-		%>
-		<tr>
-			<td><%=item.getReference()%></td>
-			<td><%=item.getNom()%></td>
-			<td><%=item.getDateAchat()%></td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
-
-	<%
-		}
-	%>
+	<jsp:include page="menu.jsp"></jsp:include>		
 	
+	<c:if test="${equipements != null && equipements.size() > 0}">
+   	
+		<h1>Liste des equipements</h1>			
+	
+		<jsp:include page="equipements.jsp"></jsp:include>
+	
+	</c:if>
 
 	<h1>Nouvel equipement</h1>
 
@@ -63,5 +43,6 @@
 		</div>
 
 	</form>
+	
 </body>
 </html>

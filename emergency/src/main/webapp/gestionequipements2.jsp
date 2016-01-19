@@ -1,4 +1,5 @@
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.formation.emergency.domain.pojo.Equipement"%>
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -11,38 +12,19 @@
 </head>
 <body>
 
-	<%
-		List<Equipement> result = ((List<Equipement>) request.getAttribute("equipements"));
-
-		if (result != null && result.size() != 0) {
-	%>
-
 	<h1>Liste des equipements</h1>
 
+
 	<table>
-		<tr>
-			<td>Reference</td>
-			<td>Nom</td>
-			<td>Date d'achat</td>
-		</tr>
-		
-		<%
-			for (Equipement item : result) {
-		%>
-		<tr>
-			<td><%=item.getReference()%></td>
-			<td><%=item.getNom()%></td>
-			<td><%=item.getDateAchat()%></td>
-		</tr>
-		<%
-			}
-		%>
+		<c:forEach items="${equipements}" var="equip">
+			<tr>
+				<td>${equip.reference}</td>
+				<td>${equip.dateAchat}</td>
+				<td><a href="/emergency/ge?id=${equip.id}">Supprimer</a></td>
+			</tr>
+		</c:forEach>
 	</table>
 
-	<%
-		}
-	%>
-	
 
 	<h1>Nouvel equipement</h1>
 
