@@ -32,6 +32,7 @@ public class LogIn extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+			
 		String requestedUserName = request.getParameter("username");
 		String requestedPassword = request.getParameter("password");
 		response.getWriter().append(requestedUserName);
@@ -47,7 +48,9 @@ public class LogIn extends HttpServlet {
 		}
 
 		if(requestedPassword.equals(Password) && requestedUserName.equals(UserName)){
+			request.getSession().setAttribute("loggedin", true);
 			response.sendRedirect("form.html");	
+			
 		}else{
 			response.getWriter().append("Wrong UserName and/or Password");
 		}
