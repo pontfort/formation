@@ -19,4 +19,8 @@ public interface ILogistique {
 	Equipement mettreADisposition(Object refEquipement) throws IndisponibiliteException;
 	
 	List<Equipement> getbyCriteria(String sarting, String containing, String ending, Date dateachat,int prixmin, int prixmax);
+
+	public Equipement getById(Integer eqId);
+
+	public List<Equipement> FindAll();
 }

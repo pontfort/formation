@@ -65,4 +65,14 @@ public class Logistique implements ILogistique {
 		return this.equipementJPA.findByReferenceStartingWithAndReferenceContainingAndReferenceEndingWithAndDateAchatNotNullAndDateAchatAfterAndPrixBetweenOrderByPrix(sarting, containing, ending, dateachat, prixmin, prixmax);
 	}
 
+	@Override
+	public Equipement getById(Integer eqId) {
+		return this.equipementJPA.findOne(eqId);
+	}
+
+	@Override
+	public List<Equipement> FindAll() {
+		return this.equipementJPA.findAll();
+	}
+
 }
