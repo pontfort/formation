@@ -8,11 +8,12 @@
 		<td>Nom</td>
 		<td>Date d'achat</td>
 	</tr>
-	<c:forEach items="${requestScope.equipements}" var="item">
+	<c:forEach items="${equipements}" var="item">
 		<tr>
 			<td><c:out value="${item.reference}"></c:out></td>
 			<td><c:out value="${item.nom}"></c:out></td>
 			<td><c:out value="${item.dateAchat}"></c:out></td>
+			<td><a href="/emergency/spring/equipement/${item.id}/delete">Supprimer</a></td>
 		</tr>
 	</c:forEach>
 </table>

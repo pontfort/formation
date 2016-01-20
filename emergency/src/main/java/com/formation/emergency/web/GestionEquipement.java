@@ -35,9 +35,9 @@ public class GestionEquipement extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	this.context = new ClassPathXmlApplicationContext("emergency.xml");
-		this.logistique = (ILogistique) context.getBean("logistique");
     	super.init();
+//    	this.context = new ClassPathXmlApplicationContext("emergency.xml");
+//		this.logistique = (ILogistique) context.getBean("logistique");    	
     }
 
 	/**

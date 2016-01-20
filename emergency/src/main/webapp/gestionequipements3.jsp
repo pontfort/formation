@@ -12,7 +12,7 @@
 </head>
 <body>	
 
-	Session ID : <c:out value="${pageContext.session.id}"></c:out>
+<%-- 	Session ID : <c:out value="${pageContext.session.id}"></c:out> --%>
 
 	<jsp:include page="menu.jsp"></jsp:include>		
 	
@@ -26,7 +26,7 @@
 
 	<h1>Nouvel equipement</h1>
 
-	<form method="post" action="gestione">
+	<form method="post" action="/emergency/spring/equipement/create">
 
 		<div>
 			Reference : <input type="text" name="reference">
@@ -35,7 +35,7 @@
 			Nom : <input type="text" name="nom">
 		</div>
 		<div>
-			Date achat : <input type="date" name="date_achat">
+			Date achat : <input type="date" name="dateAchat">
 		</div>
 
 		<div>
