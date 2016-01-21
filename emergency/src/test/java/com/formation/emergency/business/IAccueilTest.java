@@ -39,6 +39,7 @@ public class IAccueilTest extends TestCase {
 		pere.setEtat(EtatPatient.CONSULTATION);
 
 		receptionner();
+		sortie();
 	}
 
 	private void receptionner() {

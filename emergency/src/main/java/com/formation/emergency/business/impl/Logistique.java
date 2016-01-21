@@ -1,7 +1,10 @@
 package com.formation.emergency.business.impl;
 
 import java.util.Date;
+
 import java.util.List;
+
+import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +16,7 @@ import com.formation.emergency.domain.pojo.EtatEquipement;
 import com.formation.emergency.exception.IndisponibiliteException;
 import com.formation.emergency.exception.code.Indisponibilite;
 
-//@Service("logistique")
+@WebService(endpointInterface = "com.formation.emergency.business.ILogistique")
 @Transactional
 public class Logistique implements ILogistique {
 
@@ -37,8 +40,8 @@ public class Logistique implements ILogistique {
 	}
 
 	@Override
-	public void retirer(Equipement item) throws Exception {
-		logistique.delete(item.getId());
+	public void retirer(Integer id) throws Exception {
+		logistique.delete(id);
 	}
 
 	@Override
@@ -69,6 +72,11 @@ public class Logistique implements ILogistique {
 				.findByReferenceStartingWithAndReferenceContainingAndReferenceEndingWithAndDateAchatIsNotNullAndDateAchatBetweenAndPriceBetweenOrderByPriceDesc(
 						refStart, refContain, refEnding, startDate, endingDate, priceMin, priceMax);
 
+	}
+
+	@Override
+	public List<Equipement> findAll() {
+		return logistique.findAll();
 	}
 
 }

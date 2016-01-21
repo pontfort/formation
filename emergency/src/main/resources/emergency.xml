@@ -2,8 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:soap="http://cxf.apache.org/bindings/soap"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context 
@@ -11,10 +12,28 @@
                            http://www.springframework.org/schema/aop 
                            http://www.springframework.org/schema/aop/spring-aop.xsd
                            http://www.springframework.org/schema/tx
-                           http://www.springframework.org/schema/tx/spring-tx.xsd">
-
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://cxf.apache.org/bindings/soap 
+				           http://cxf.apache.org/schemas/configuration/soap.xsd
+				           http://cxf.apache.org/jaxws 
+				           http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<context:component-scan base-package="com.formation.emergency" />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
 	<!-- Transaction -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -35,7 +54,6 @@
 		</tx:attributes>
 	</tx:advice>
 
-
 	<import resource="emergency-service.xml" />
 
 	<import resource="emergency-dao.xml" />
@@ -43,5 +61,9 @@
 	<import resource="emergency-config-db.xml" />
 
 	<import resource="emergency-aop.xml" />
+
+	<import resource="emergency-ws.xml" />
+
+	<import resource="emergency-rest.xml" />
 
 </beans>                                    

@@ -3,8 +3,11 @@ package com.formation.emergency.business;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.formation.emergency.domain.pojo.Equipement;
 
+@WebService
 public interface ILogistique {
 
 	void acheter(Equipement item) throws Exception;
@@ -13,8 +16,6 @@ public interface ILogistique {
 
 	void reparer(Equipement item) throws Exception;
 
-	void retirer(Equipement item) throws Exception;
-
 	Equipement mettreADisposition(Integer id) throws Exception;
 
 	void recuperer(Equipement item) throws Exception;
@@ -22,5 +23,9 @@ public interface ILogistique {
 	List<Equipement> findByReferenceStartingWithAndReferenceContainingAndReferenceEndingWithAndDateAchatNotNullDateAchatBetweenAndPriceBetweenOrderByPriceDesc(
 			String refStart, String refContain, String refEnding, Date startDate, Date endingDate, int priceMin,
 			int priceMax);
+
+	List<Equipement> findAll();
+
+	void retirer(Integer id) throws Exception;
 
 }

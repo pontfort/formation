@@ -49,39 +49,40 @@ public class EquipementDaoJPA extends DaoJPA implements IDaoEquipement, IDao<Equ
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Equipement> find(List<Predicate> predicates) throws Exception {
-	
+
 		StringBuilder builder = new StringBuilder();
 		builder.append("FROM Equipement e WHERE 1=1");
-		
+
 		int noParam = 0;
-		if (predicates != null) {			
-			
+		if (predicates != null) {
+
 			for (Predicate predicate : predicates) {
-				builder.append(" AND ");				
+				builder.append(" AND ");
 				switch (predicate.getOperator()) {
-				case STEMMING :				
+				case STEMMING:
 					break;
 				default:
-					builder.append(predicate.getFieldName()).append(predicate.getOperator().getValue()).append("?");					
+					builder.append(predicate.getFieldName()).append(predicate.getOperator().getValue()).append("?");
 				}
-				
-			}				
-		
+
+			}
+
 		}
-				
-		String queryStr = builder.toString(); 		
-		Query query =this.getEm().createQuery(queryStr);
-		
+
+		String queryStr = builder.toString();
+		Query query = this.getEm().createQuery(queryStr);
+
 		if (predicates != null) {
 			noParam = 1;
 			for (Predicate predicate : predicates) {
-				query.setParameter(noParam++,  predicate.getFieldValue());				
-			}				
-		
+				query.setParameter(noParam++, predicate.getFieldValue());
+			}
+
 		}
-				
+
 		return query.getResultList();
 	}
 
@@ -89,6 +90,6 @@ public class EquipementDaoJPA extends DaoJPA implements IDaoEquipement, IDao<Equ
 	public void delete(Object key) {
 		Equipement item = this.find(key);
 		this.getEm().remove(item);
-	}	
+	}
 
 }

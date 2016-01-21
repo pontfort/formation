@@ -1,5 +1,7 @@
 package com.formation.emergency.domain.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
@@ -15,14 +17,25 @@ import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 import com.formation.emergency.domain.pojo.code.EtatPatient;
 
 @Entity
-@DiscriminatorValue(value="PATIENT")
+@DiscriminatorValue(value = "PATIENT")
 @NamedQueries({
-	@NamedQuery(name=QueriesDictionary.PATIENT_UPDATE,query="UPDATE Patient p SET p.etat = :" + QueriesDictionary.PATIENT_QUERY_PARAM_ETAT + ",p.numeroSECU = :" + QueriesDictionary.PATIENT_QUERY_PARAM_SECU + ", p.nom = :" + QueriesDictionary.PATIENT_QUERY_PARAM_NOM + ", p.prenom = :" + QueriesDictionary.PATIENT_QUERY_PARAM_PRENOM + " WHERE p.id = :" + QueriesDictionary.PATIENT_QUERY_PARAM_ID),
-	@NamedQuery(name=QueriesDictionary.PATIENT_UPDATE_ETAT,query="UPDATE Patient p SET etat = :" + QueriesDictionary.PATIENT_QUERY_PARAM_ETAT + " WHERE p.id = :" + QueriesDictionary.PATIENT_QUERY_PARAM_ID),
-	@NamedQuery(name=QueriesDictionary.PATIENT_DELETE,query="DELETE Patient p WHERE p.id = :" + QueriesDictionary.PATIENT_QUERY_PARAM_ID)
-})
-public class Patient extends Personne {
-	
+		@NamedQuery(name = QueriesDictionary.PATIENT_UPDATE, query = "UPDATE Patient p SET p.etat = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_ETAT + ",p.numeroSECU = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_SECU + ", p.nom = :" + QueriesDictionary.PATIENT_QUERY_PARAM_NOM
+				+ ", p.prenom = :" + QueriesDictionary.PATIENT_QUERY_PARAM_PRENOM + " WHERE p.id = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_ID),
+		@NamedQuery(name = QueriesDictionary.PATIENT_UPDATE_ETAT, query = "UPDATE Patient p SET etat = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_ETAT + " WHERE p.id = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_ID),
+		@NamedQuery(name = QueriesDictionary.PATIENT_DELETE, query = "DELETE Patient p WHERE p.id = :"
+				+ QueriesDictionary.PATIENT_QUERY_PARAM_ID) })
+public class Patient extends Personne implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Embedded
 	private Adresse adresse;
 
@@ -36,9 +49,9 @@ public class Patient extends Personne {
 
 	public Patient() {
 	}
-	
+
 	public Patient(String nom, String prenom) {
-		super(nom,prenom);
+		super(nom, prenom);
 	}
 
 	public Adresse getAdresse() {
@@ -63,7 +76,7 @@ public class Patient extends Personne {
 
 	public void setEtat(EtatPatient etat) {
 		this.etat = etat;
-	}	
+	}
 
 	@Override
 	public String toString() {

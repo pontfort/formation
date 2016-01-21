@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,6 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 
@@ -25,7 +33,14 @@ import com.formation.emergency.domain.dao.repository.QueriesDictionary;
 				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID),
 		@NamedQuery(name = QueriesDictionary.EQUIPEMENT_DELETE, query = "DELETE Equipement e WHERE e.id = :"
 				+ QueriesDictionary.EQUIPEMENT_QUERY_PARAM_ID) })
-public class Equipement {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Equipement implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +48,8 @@ public class Equipement {
 
 	private String reference;
 
+	@NotNull
+	@Size(min = 1)
 	private String nom;
 
 	@Enumerated(EnumType.STRING)
@@ -40,6 +57,7 @@ public class Equipement {
 
 	private boolean reserve = false;
 
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date dateAchat;
 
 	private String PaysOrigine;

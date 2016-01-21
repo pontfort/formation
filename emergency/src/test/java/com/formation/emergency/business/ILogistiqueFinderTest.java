@@ -55,8 +55,9 @@ public class ILogistiqueFinderTest extends TestCase {
 			this.logistique.acheter(amb2);
 			this.logistique.acheter(amb3);
 
+			gregorianCalendar.set(Calendar.DATE, gregorianCalendar.get(Calendar.DATE) + 1);
 			Date timeEnding = gregorianCalendar.getTime();
-			
+
 			gregorianCalendar.set(Calendar.DATE, -20);
 			Date timeStart = gregorianCalendar.getTime();
 

@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo.feuilles;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
@@ -9,7 +10,12 @@ import com.formation.emergency.domain.pojo.Patient;
 
 @Entity
 @DiscriminatorValue(value="ACTENAISSANCE")
-public class ActeNaissance extends Acte {
+public class ActeNaissance extends Acte implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private transient Patient patient;
 	

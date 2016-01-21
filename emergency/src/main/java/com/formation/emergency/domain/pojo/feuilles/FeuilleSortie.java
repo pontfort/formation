@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo.feuilles;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,8 +20,12 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TypeFeuille", discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue(value="FEUILLE")
-public abstract class FeuilleSortie {
+public abstract class FeuilleSortie implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_FeuilleSortie")
