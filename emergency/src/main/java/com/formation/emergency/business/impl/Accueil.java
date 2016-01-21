@@ -1,5 +1,7 @@
 package com.formation.emergency.business.impl;
 
+import javax.jws.WebService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,7 @@ import com.formation.emergency.exception.RechercheException;
 import com.formation.emergency.exception.code.Recherche;
 
 @Transactional
+@WebService(endpointInterface="com.formation.emergency.business.IAccueil")
 public class Accueil implements IAccueil {
 
 	private IRepository<Patient> patientDao;
@@ -86,4 +89,7 @@ public class Accueil implements IAccueil {
 		this.patientDao.update((Patient) person);
 	}
 
+	public String nimportequoi(){
+		return"qskljdgqkjhsdgk";
+	}
 }

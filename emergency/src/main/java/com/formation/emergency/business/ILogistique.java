@@ -3,9 +3,12 @@ package com.formation.emergency.business;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.formation.emergency.domain.pojo.Equipement;
 import com.formation.emergency.exception.IndisponibiliteException;
 
+@WebService
 public interface ILogistique {
 
 	public void acheter(Equipement equipement) throws IndisponibiliteException;

@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,6 +14,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.formation.emergency.domain.dao.QueriesDictionary;
 import com.formation.emergency.domain.pojo.code.EtatEquipement;
@@ -22,7 +26,9 @@ import com.formation.emergency.domain.pojo.code.TypeEquipement;
 @Table(name = "machine")
 @NamedQueries({ @NamedQuery(name = QueriesDictionary.EQUIPEMENT_DELETE, query = "DELETE Equipement e WHERE e.id=:"
 		+ QueriesDictionary.EQUIPEMENT_QUERYPARAM_ID) })
-public class Equipement {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Equipement implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

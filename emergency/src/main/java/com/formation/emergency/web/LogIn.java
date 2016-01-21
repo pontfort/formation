@@ -19,7 +19,7 @@ public class LogIn extends HttpServlet {
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public LogIn() {
-		super();
+		super(); 
 		// TODO Auto-generated constructor stub
 	}
 
