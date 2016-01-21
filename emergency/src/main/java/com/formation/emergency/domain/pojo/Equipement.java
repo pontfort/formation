@@ -1,5 +1,6 @@
 package com.formation.emergency.domain.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -12,6 +13,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.formation.emergency.domain.dao.repository.QueriesDictonary;
 
@@ -21,12 +25,14 @@ import com.formation.emergency.domain.dao.repository.QueriesDictonary;
 	@NamedQuery(name = QueriesDictonary.EQUIPEMENT_UPDATE_DISPONIBLE, query = "UPDATE Equipement e SET e.disponible = :"+ QueriesDictonary.EQUIPEMENT_DISPONIBLE + " WHERE e.id = :" + QueriesDictonary.EQUIPEMENT_ID),
 	@NamedQuery(name = QueriesDictonary.EQUIPEMENT_DELETE, query = "DELETE Equipement e WHERE e.id = :" + QueriesDictonary.EQUIPEMENT_ID)
 })
-public class Equipement {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Equipement implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "machine_id")
-	private Long id;
+	private int id;
 	@Column(name = "ref")
 	private String reference;
 	@Column(name = "available")
@@ -52,11 +58,11 @@ public class Equipement {
 		this.disponible = disponible;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

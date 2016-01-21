@@ -1,5 +1,7 @@
 package com.formation.emergency.business.impl;
 
+import javax.jws.WebService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import com.formation.emergency.domain.pojo.feuilles.Ordonnance;
 import com.formation.emergency.exception.RechercheException;
 
 @Transactional
+@WebService(endpointInterface="com.formation.emergency.business.IAccueil")
 public class Accueil implements IAccueil {
 
 	private IRepository<Patient> patientDao;

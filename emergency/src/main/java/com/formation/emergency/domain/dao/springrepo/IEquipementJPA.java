@@ -15,12 +15,15 @@ import com.formation.emergency.domain.pojo.Equipement;
 
 public interface IEquipementJPA extends JpaRepository<Equipement, Integer> {
 //cas 1 : query locale
-	/*@Modifying
+	@Modifying
 	@Query("UPDATE Equipement e SET e.disponible = :"+ QueriesDictonary.EQUIPEMENT_DISPONIBLE + " WHERE e.id = :" + QueriesDictonary.EQUIPEMENT_ID)
-	void changerEtat(@Param(QueriesDictonary.EQUIPEMENT_DISPONIBLE)Boolean dispo, @Param(QueriesDictonary.EQUIPEMENT_ID)int id); */
+	void changerEtat(@Param(QueriesDictonary.EQUIPEMENT_DISPONIBLE)Boolean dispo, @Param(QueriesDictonary.EQUIPEMENT_ID)int id);
 //cas 2 : named query
-	/*@Modifying
-	void supprimer(@Param(QueriesDictonary.EQUIPEMENT_ID)int id);*/
+	@Modifying
+	void supprimer(@Param(QueriesDictonary.EQUIPEMENT_ID)int id);
 // cas 3 : query auto build
 	List<Equipement> findByReferenceStartingWithAndReferenceContainingAndReferenceEndingWithAndDateAchatNotNullAndDateAchatBetweenAndPrixBetweenOrderByPrixDesc(String commencePar, String contient, String finiPar, Date dateVingtJour, Date dateDuJour, int prixMin, int prixMax);
+	
+	
+	
 }

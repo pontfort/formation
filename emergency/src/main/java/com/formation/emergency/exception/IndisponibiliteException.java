@@ -1,8 +1,10 @@
 package com.formation.emergency.exception;
 
+import java.io.Serializable;
+
 import com.formation.emergency.exception.code.Indisponibilite;
 
-public class IndisponibiliteException extends Exception {
+public class IndisponibiliteException extends Exception implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
