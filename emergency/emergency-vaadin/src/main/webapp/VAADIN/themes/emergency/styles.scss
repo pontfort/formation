@@ -1,0 +1,44 @@
+@import "emergency.scss";
+
+@mixin standardDesign($height, $background) {
+  	height: $height;
+	background: $background;
+	display: block;
+	text-align:center;
+}
+
+.emergency {
+	@include emergency;
+	
+	.btnErikou{
+		color: pink;
+	}
+	
+	.header{
+		@include standardDesign(30px,#FF0048);
+	}
+	
+	.content{
+		//@include standardDesign(800px,green);
+		.form {
+			width : 100%;	
+			background : white;	
+			 .v-slot{
+			 	    display: block;
+    				margin: 10px 10px 10px 10px;
+			  	.v-has-caption{
+			  		display : inline-flex;
+			  		.v-caption{
+			  			width:100px;
+			  			text-align : right;
+			  		}
+			 	}
+			 }
+			 
+		}
+	}
+	
+	.footer{
+		@include standardDesign(100px,#00FF48);
+	}
+}
